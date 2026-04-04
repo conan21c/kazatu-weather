@@ -7,13 +7,13 @@
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f0f7ff;
             --primary-blue: #0f4c81;
             --accent-blue: #3b82f6;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
+            --bg-light: #f8fafc;
             --text-dark: #1e293b;
             --text-muted: #64748b;
+            --card-bg-white: rgba(255, 255, 255, 0.9);
+            --card-bg-blue: rgba(15, 76, 129, 0.95);
         }
 
         * {
@@ -26,214 +26,274 @@
         body {
             width: 1080px;
             height: 1600px;
-            background: radial-gradient(circle at top right, #ffffff 0%, #eef6ff 40%, #dae9f8 100%);
-            padding: 70px 60px;
+            background-color: #ffffff;
+            background-image: radial-gradient(at 0% 0%, hsla(210,100%,98%,1) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(210,100%,95%,1) 0, transparent 50%);
+            padding: 80px 100px;
             color: var(--text-dark);
-            position: relative;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            align-items: center; /* 전체 중앙 정렬 */
         }
 
-        /* Ambient Blobs */
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 1;
-            opacity: 0.5;
-        }
-        .blob-1 { top: -200px; right: -200px; width: 800px; height: 800px; background: #a1c4fd; }
-        .blob-2 { bottom: -300px; left: -300px; width: 900px; height: 900px; background: #c2e9fb; }
-
-        .container {
-            position: relative;
-            z-index: 2;
+        .dashboard {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            gap: 45px;
         }
 
-        /* Header Area */
+        /* HEADER - Centered & Redesigned */
         .header {
+            text-align: center;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 60px; /* 여백 승인 반영 */
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .header-text h1 {
-            font-size: 54px;
+        .header h1 {
+            font-size: 58px;
             font-weight: 900;
-            letter-spacing: -2px;
+            letter-spacing: -2.5px;
             color: var(--primary-blue);
-            line-height: 1.1;
         }
 
-        .header-text p {
-            font-size: 24px;
-            font-weight: 700;
+        .header .sub {
+            font-size: 26px;
+            font-weight: 600;
             color: var(--text-muted);
-            margin-top: 10px;
+            letter-spacing: -0.5px;
         }
 
-        .date-badge {
-            background: rgba(15, 76, 129, 0.85);
-            backdrop-filter: blur(20px);
-            padding: 20px 45px;
-            border-radius: 30px;
+        .date-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--primary-blue);
             color: white;
-            text-align: right;
-            box-shadow: 0 15px 35px rgba(15, 76, 129, 0.15);
+            padding: 20px 60px;
+            border-radius: 25px;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(15, 76, 129, 0.15);
         }
 
-        .date-badge .day { font-size: 30px; font-weight: 900; letter-spacing: 2px; }
-        .date-badge .date { font-size: 18px; opacity: 0.8; margin-top: 4px; font-weight: 500; }
+        .date-container .day-label {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
 
-        /* Weather Grid */
+        .date-container .date-label {
+            font-size: 20px;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* GRID - Centered & Solid-ish Design */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: 30px;
+            width: 100%;
         }
 
         .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(45px) saturate(160%);
-            -webkit-backdrop-filter: blur(45px) saturate(160%);
-            border: 1.5px solid var(--glass-border);
-            border-radius: 40px;
-            padding: 35px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), inset 0 0 15px rgba(255,255,255,0.2);
+            background: var(--card-bg-white);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 35px;
+            padding: 40px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
             position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
         }
 
         .card.highlight {
             grid-column: span 2;
-            background: linear-gradient(135deg, rgba(15, 76, 129, 0.85) 0%, rgba(37, 99, 235, 0.85) 100%);
+            background: var(--card-bg-blue);
             color: white;
             border: none;
+            box-shadow: 0 20px 45px rgba(15, 76, 129, 0.2);
         }
 
-        .card-inner {
+        .location-box h2 {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .card:not(.highlight) .location-box h2 { color: var(--primary-blue); }
+
+        .condition-badge {
+            font-size: 20px;
+            font-weight: 700;
+            opacity: 0.85;
+        }
+
+        .temp-box {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            z-index: 2;
+            align-items: baseline;
+            gap: 12px;
+            margin-top: 30px;
         }
 
-        .location-info h2 { font-size: 32px; font-weight: 900; margin-bottom: 5px; }
-        .card:not(.highlight) .location-info h2 { color: var(--primary-blue); }
-        .condition-text { font-size: 20px; font-weight: 700; opacity: 0.9; }
-        .card:not(.highlight) .condition-text { color: var(--text-muted); }
+        /* Redesigned Temperature Font - Elegant & Slim */
+        .temp-high {
+            font-size: 72px;
+            font-weight: 300; /* Slim weight as requested */
+            letter-spacing: -4px;
+            line-height: 1;
+        }
 
-        .temp-display { display: flex; align-items: baseline; gap: 15px; margin-top: 25px; }
-        .temp-main { font-size: 72px; font-weight: 900; letter-spacing: -3px; }
-        .temp-sub { font-size: 32px; font-weight: 600; opacity: 0.7; }
+        .temp-low {
+            font-size: 34px;
+            font-weight: 500;
+            opacity: 0.6;
+        }
 
-        .icon-area { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
-        .weather-icon { font-size: 75px; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)); margin-bottom: 20px; }
-        
-        .pill { 
-            background: rgba(255,255,255,0.4); 
-            padding: 6px 16px; 
-            border-radius: 20px; 
-            font-size: 14px; 
-            font-weight: 800; 
+        .icon-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
+        }
+
+        .weather-icon {
+            font-size: 80px;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+        }
+
+        .altitude-label {
+            background: rgba(0,0,0,0.05);
+            padding: 6px 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 800;
             color: var(--text-muted);
-            border: 1px solid rgba(255,255,255,0.3);
         }
-        .highlight .pill { background: rgba(255,255,255,0.2); color: white; border: none; }
 
-        /* Advice Section (Moved Below) */
-        .advice-section {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(50px);
-            border-radius: 40px;
-            padding: 40px 50px;
-            border: 1.5px solid var(--glass-border);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+        .highlight .altitude-label {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        /* TOUR ADVICE - Bottom Centered */
+        .advice-card {
+            background: #ffffff;
+            border: 2px solid var(--primary-blue);
+            border-radius: 35px;
+            padding: 45px 55px;
             display: flex;
-            gap: 35px;
             align-items: center;
-            margin-top: auto;
+            gap: 40px;
+            margin-top: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
         }
 
         .advice-icon {
-            width: 85px; height: 85px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border-radius: 28px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 40px; color: white; flex-shrink: 0;
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.25);
+            width: 90px;
+            height: 90px;
+            background: var(--primary-blue);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            color: white;
+            flex-shrink: 0;
         }
 
-        .advice-text h3 { font-size: 18px; font-weight: 900; color: var(--accent-blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-        .advice-text p { font-size: 26px; font-weight: 700; line-height: 1.5; color: var(--text-dark); word-break: keep-all; }
+        .advice-content h3 {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
 
-        /* Footer */
-        .footer { text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); }
-        .footer-info { font-size: 16px; font-weight: 700; color: var(--text-muted); margin-bottom: 15px; }
-        .footer-copyright { font-size: 20px; font-weight: 900; color: var(--primary-blue); letter-spacing: 1px; }
-        .footer-author { font-size: 14px; font-weight: 800; color: var(--text-muted); margin-top: 5px; text-transform: uppercase; }
+        .advice-content p {
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.55;
+            color: var(--text-dark);
+            word-break: keep-all;
+        }
 
+        /* FOOTER */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer-source {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .footer-copyright {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            letter-spacing: 1.5px;
+        }
     </style>
 </head>
 <body>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-
-    <div class="container">
-        <div class="header">
-            <div class="header-text">
-                <h1>[카자투]에서 전하는 날씨 정보</h1>
-                <p>알마티 & 주요 관광지 기상 정보</p>
+    <div class="dashboard">
+        <!-- Centered Header -->
+        <header class="header">
+            <p class="sub">알마티 & 주요 관광지 기상 정보</p>
+            <h1>[카자투]에서 전하는 날씨 정보</h1>
+            <div class="date-container">
+                <span class="day-label">{{ day_eng }}</span>
+                <span class="date-label">{{ date_str }}</span>
             </div>
-            <div class="date-badge">
-                <div class="day">{{ day_eng }}</div>
-                <div class="date">{{ date_str }}</div>
-            </div>
-        </div>
+        </header>
 
+        <!-- Weather Grid -->
         <div class="grid">
             {% for loc in locations %}
             <div class="card {{ 'highlight' if loc.id == 'almaty' else '' }}">
-                <div class="card-inner">
-                    <div class="location-info">
-                        <h2>{{ loc.name }}</h2>
-                        <div class="condition-text">{{ loc.desc }}</div>
-                        <div class="temp-display">
-                            <span class="temp-main">{{ loc.max }}°</span>
-                            <span class="temp-sub">/ {{ loc.min }}°</span>
-                        </div>
+                <div class="location-box">
+                    <h2>{{ loc.name }}</h2>
+                    <span class="condition-badge">{{ loc.desc }}</span>
+                    <div class="temp-box">
+                        <span class="temp-high">{{ loc.max }}°</span>
+                        <span class="temp-low">/ {{ loc.min }}°</span>
                     </div>
-                    <div class="icon-area">
-                        <div class="weather-icon">{{ loc.icon }}</div>
-                        <div class="pill">{{ loc.info }}</div>
-                    </div>
+                </div>
+                <div class="icon-box">
+                    <span class="weather-icon">{{ loc.icon }}</span>
+                    <span class="altitude-label">{{ loc.info }}</span>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <div class="advice-section">
+        <!-- Centered Tour Advice Box -->
+        <div class="advice-card">
             <div class="advice-icon">🚙</div>
-            <div class="advice-text">
-                <h3>TOUR ADVICE</h3>
+            <div class="advice-content">
+                <h3>KAJATU TOUR ADVICE</h3>
                 <p>{{ ai_comment }}</p>
             </div>
         </div>
 
-        <div class="footer">
-            <p class="footer-info">위 기상 정보의 출처는 A,B로 표기된 지역과 고도를 동시에 체크해 얻은 정보로 작성되었습니다.</p>
+        <!-- Footer with Specific Source -->
+        <footer class="footer">
+            <p class="footer-source">위 기상 정보의 출처는 Open-Meteo(국제 기상 기구) 및 Kazhydromet(카자흐 국영 기상청)에서 확인된<br>해당 지역과 고도를 동시에 체크하여 얻은 정보로 작성되었습니다.</p>
             <div class="footer-copyright">COPYRIGHT © KAJATU. ALL RIGHTS RESERVED.</div>
-            <div class="footer-author">Created by KAJATU</div>
-        </div>
+        </footer>
     </div>
 </body>
 </html>
