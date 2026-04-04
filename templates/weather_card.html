@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajatu Weather Infographic</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1A73E8;
+            --light-blue: #E8F0FE;
+            --gradient-bg: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 100%);
+            --text-dark: #1F2937;
+            --text-gray: #6B7280;
+            --card-bg: white;
+            --shadow: 0 10px 25px rgba(26, 115, 232, 0.08);
+            --border-radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+        }
+
+        body {
+            width: 1080px;
+            height: 1350px;
+            background: var(--gradient-bg);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-dark);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--primary-blue);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+        }
+
+        /* Main Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            flex-grow: 1;
+        }
+
+        /* Almaty (Spans 2 columns) */
+        .feature-card {
+            grid-column: span 2;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 15px 30px rgba(26, 115, 232, 0.2);
+        }
+
+        .feature-card .location-name {
+            font-size: 36px;
+            font-weight: 800;
+        }
+        
+        .feature-card .temp-display {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+
+        .feature-card .temp-high {
+            font-size: 72px;
+            font-weight: 800;
+        }
+
+        .feature-card .temp-range {
+            font-size: 28px;
+            opacity: 0.9;
+        }
+
+        .feature-card .icon-weather {
+            font-size: 80px;
+        }
+
+        /* Standard Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(26, 115, 232, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle Accent indicator */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: var(--primary-blue);
+            opacity: 0.8;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .location-name {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .icon-weather {
+            font-size: 60px;
+        }
+
+        .temp-row {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+
+        .temp-high {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .temp-low {
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--text-gray);
+        }
+
+        .condition {
+            font-size: 24px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid rgba(0,0,0,0.05);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            letter-spacing: 1px;
+        }
+
+        .footer-desc {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="subtitle">Daily Weather Forecast</div>
+        <div class="title">알마티 & 인근 국립공원 날씨</div>
+        <div class="date-badge">2026년 4월 5일 (일)</div>
+    </div>
+
+    <div class="grid-container">
+        <!-- Main: Almaty -->
+        <div class="feature-card">
+            <div>
+                <div class="location-name">알마티 시내 (Almaty)</div>
+                <div class="condition" style="color: white; opacity: 0.9;">맑고 화창함</div>
+            </div>
+            <div class="temp-display">
+                <div class="temp-high">20°</div>
+                <div class="temp-range">/ 8°</div>
+                <div class="icon-weather">☀️</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="location-name">차른캐년</div>
+                <div class="icon-weather">⛅</div>
+            </div>
+            <div class="temp-row">
+                <div class="temp-high">22°</div>
+                <div class="temp-low">/ 10°</div>
+            </div>
+            <div class="condition">구름 조금, 따뜻함</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="location-name">콜사이 호수</div>
+                <div class="icon-weather">🌧️</div>
+            </div>
+            <div class="temp-row">
+                <div class="temp-high">8°</div>
+                <div class="temp-low">/ 1°</div>
+            </div>
+            <div class="condition">오후 비 (체감 춥군)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="location-name">카인디 호수</div>
+                <div class="icon-weather">☁️</div>
+            </div>
+            <div class="temp-row">
+                <div class="temp-high">5°</div>
+                <div class="temp-low">/ -2°</div>
+            </div>
+            <div class="condition">흐림, 바람 많이 붊</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="location-name">알틴에멜</div>
+                <div class="icon-weather">☀️</div>
+            </div>
+            <div class="temp-row">
+                <div class="temp-high">26°</div>
+                <div class="temp-low">/ 12°</div>
+            </div>
+            <div class="condition">강한 햇살 (건조함)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="location-name">아씨고원</div>
+                <div class="icon-weather">❄️</div>
+            </div>
+            <div class="temp-row">
+                <div class="temp-high">2°</div>
+                <div class="temp-low">/ -5°</div>
+            </div>
+            <div class="condition">눈발 날림</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="location-name">침블락 (중간역)</div>
+                <div class="icon-weather">🌤️</div>
+            </div>
+            <div class="temp-row">
+                <div class="temp-high">4°</div>
+                <div class="temp-low">/ -3°</div>
+            </div>
+            <div class="condition">맑으나 쌀쌀함</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="logo-text">KAJATU</div>
+        <div class="footer-desc">카자흐스탄 여행의 모든 것, 카자투 카페</div>
+    </div>
+
+</body>
+</html>

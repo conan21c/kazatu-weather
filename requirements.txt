@@ -1,0 +1,4 @@
+google-genai
+playwright
+jinja2
+requests

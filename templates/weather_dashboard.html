@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajatu Weather Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e0eaf5;
+            --primary-blue: #0f4c81;
+            --accent-blue: #3b82f6;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard Variable', Pretendard, sans-serif;
+        }
+
+        body {
+            width: 1080px;
+            height: 1600px;
+            background: radial-gradient(circle at top left, #ffffff 0%, #e0eaf5 50%, #c4dbf3 100%);
+            padding: 50px 60px;
+            color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blob-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        .blob-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 700px;
+            height: 700px;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        .dashboard {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header h1 {
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--primary-blue);
+            line-height: 1.1;
+        }
+
+        .header .sub {
+            font-size: 24px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .header .date-box {
+            text-align: right;
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(15, 76, 129, 0.2);
+        }
+
+        .header .date-box .day {
+            font-size: 32px;
+            font-weight: 800;
+        }
+        .header .date-box .date {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .ai-advisor {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .ai-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .ai-content h3 {
+            font-size: 24px;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .ai-content p {
+            font-size: 24px;
+            line-height: 1.5;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex-grow: 1;
+        }
+
+        .weather-card.highlight {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+        .weather-card.highlight .temp-high { color: white; }
+        .weather-card.highlight .temp-low { color: rgba(255,255,255,0.8); }
+        .weather-card.highlight .location-name { color: white; }
+        .weather-card.highlight .condition { color: rgba(255,255,255,0.9); }
+
+        .weather-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-graphic {
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .card-inner {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .location-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .condition {
+            font-size: 20px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .temps {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .temp-high {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .temp-low {
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .card-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .weather-icon {
+            font-size: 70px;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+        }
+
+        .altitude-pill {
+            background: rgba(0,0,0,0.05);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: auto;
+            white-space: nowrap;
+        }
+        .highlight .altitude-pill {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .footer-logo {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+
+    <div class="dashboard">
+        <div class="header">
+            <div>
+                <h1>카자투 내일의 날씨</h1>
+                <div class="sub">알마티 & 주요 국립공원 기상 정보</div>
+            </div>
+            <div class="date-box">
+                <div class="day">{{ day_kor }}</div>
+                <div class="date">{{ date_str }}</div>
+            </div>
+        </div>
+
+        <div class="ai-advisor">
+            <div class="ai-icon">✨</div>
+            <div class="ai-content">
+                <h3>Gemini 여행 조언</h3>
+                <p>{{ ai_comment }}</p>
+                <!-- Tags omitted for brevity or can be dynamically added later -->
+            </div>
+        </div>
+
+        <div class="grid">
+            {% for loc in locations %}
+            <div class="weather-card {{ 'highlight' if loc.id == 'almaty' else '' }}">
+                <div class="card-graphic"></div>
+                <div class="card-inner">
+                    <div class="card-left">
+                        <div class="location-name">{{ loc.name }}</div>
+                        <div class="condition">{{ loc.desc }}</div>
+                        <div class="temps">
+                            <span class="temp-high">{{ loc.max }}°</span>
+                            <span class="temp-low">/ {{ loc.min }}°</span>
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <div class="weather-icon">{{ loc.icon }}</div>
+                        <div class="altitude-pill">{{ loc.info }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="footer">
+            <div class="footer-logo">KAJATU DASHBOARD</div>
+        </div>
+    </div>
+</body>
+</html>
