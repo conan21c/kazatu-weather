@@ -73,13 +73,13 @@ def generate_ai_comment(weather_data):
         
         data_str = ", ".join([f"{w['name']}(최대{w['max']}도/최저{w['min']}도, {w['desc']})" for w in weather_data])
         prompt = f"""
-        당신은 카자흐스탄 여행 카페 '카자투'의 날씨 도우미입니다.
-        내일의 국립공원 날씨 데이터: {data_str}
+        당신은 카자흐스탄 여행 카페 '카자투'의 날씨 전문가입니다.
+        내일의 국립공원/관광지 상세 데이터: {data_str}
         
-        이 데이터를 바탕으로 내일 알마티와 근교 국립공원을 방문하는 여행객에게 
-        가장 유용한 팁 2~3문장을 작성해주세요. 
-        산악지형(콜사이, 카인디, 아씨고원, 침블락)의 추위나, 사막지형(차른, 알틴에멜)의 일교차 등을 강조해주세요.
-        출력은 다른 말 없이 딱 필요한 팁 2~3문장만 자연스럽게 적어주세요.
+        이 데이터를 분석하여 여행객에게 '구태의연하고 뻔한 답변'이 아닌, 실질적인 조언 2~3장을 작성해주세요.
+        예를 들어, 단순히 '춥다'가 아니라 '체감 기온이 낮으니 경량 패딩이 반드시 필요하다', '비가 예정되어 비포장 도로가 위협적일 수 있으니 4륜 차량을 권장한다', '자외선이 강하니 선글라스를 필수 지참하라' 등
+        지형 특성(사막, 고산, 고원)과 매칭된 구체적인 팁을 생동감 있게 적어주세요. 
+        출력은 다른 수식어 없이 본문의 내용만 깔끔하게 답변하세요.
         """
         response = client.models.generate_content(
             model='gemini-2.5-flash',
@@ -93,8 +93,9 @@ def generate_ai_comment(weather_data):
 def render_html_to_image(weather_data, ai_comment):
     # 날짜 계산 (내일)
     tomorrow = datetime.now() + timedelta(days=1)
-    weekdays = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
-    day_kor = weekdays[tomorrow.weekday()]
+    # 영어 요일 리스트
+    weekdays_eng = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    day_eng = weekdays_eng[tomorrow.weekday()]
     date_str = tomorrow.strftime("%Y. %m. %d")
 
     # Jinja2 템플릿 렌더링
@@ -103,7 +104,7 @@ def render_html_to_image(weather_data, ai_comment):
     html_content = template.render(
         locations=weather_data,
         ai_comment=ai_comment,
-        day_kor=day_kor,
+        day_eng=day_eng,
         date_str=date_str
     )
     
