@@ -2,8 +2,8 @@ name: Daily Weather Infographic Bot
 
 on:
   schedule:
-    # 17:00 UTC = 22:00 Almaty time (UTC+5)
-    - cron: '0 17 * * *'
+    # 16:45 UTC = 21:45 Almaty time (UTC+5)
+    - cron: '45 16 * * *'
   workflow_dispatch: # Allows manual trigger from github UI
 
 jobs:
