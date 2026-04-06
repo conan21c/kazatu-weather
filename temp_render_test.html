@@ -286,30 +286,120 @@
             <span class="sub-label">ALMATY & SURROUNDINGS</span>
             <h1>/카자투/ 날씨 브리핑</h1>
             <div class="date-section">
-                <span class="date">{{ date_str }}</span>
+                <span class="date">2026. 04. 07</span>
                 <div class="date-divider"></div>
-                <span class="day">{{ day_eng }}</span>
+                <span class="day">Tuesday</span>
             </div>
         </header>
 
         <!-- Weather Grid -->
         <div class="grid">
-            {% for loc in locations %}
-            <div class="card {{ 'main' if loc.id == 'almaty' else '' }}">
+            
+            <div class="card main">
                 <div class="loc-info">
-                    <h2>{{ loc.name }}</h2>
-                    <div class="condition">{{ loc.desc }}</div>
+                    <h2>알마티 시내</h2>
+                    <div class="condition">맑음</div>
                     <div class="temps">
-                        <span class="temp-high">{{ loc.max }}°</span>
-                        <span class="temp-low">/ {{ loc.min }}°</span>
+                        <span class="temp-high">24°</span>
+                        <span class="temp-low">/ 12°</span>
                     </div>
                 </div>
                 <div class="icon-stack">
-                    <div class="w-icon">{{ loc.icon }}</div>
-                    <div class="alt-tag">{{ loc.info }}</div>
+                    <div class="w-icon">☀️</div>
+                    <div class="alt-tag">해발 800m</div>
                 </div>
             </div>
-            {% endfor %}
+            
+            <div class="card ">
+                <div class="loc-info">
+                    <h2>침블락</h2>
+                    <div class="condition">가벼운 눈</div>
+                    <div class="temps">
+                        <span class="temp-high">14°</span>
+                        <span class="temp-low">/ 4°</span>
+                    </div>
+                </div>
+                <div class="icon-stack">
+                    <div class="w-icon">❄️</div>
+                    <div class="alt-tag">해발 2200m</div>
+                </div>
+            </div>
+            
+            <div class="card ">
+                <div class="loc-info">
+                    <h2>아씨고원</h2>
+                    <div class="condition">소나기</div>
+                    <div class="temps">
+                        <span class="temp-high">12°</span>
+                        <span class="temp-low">/ 2°</span>
+                    </div>
+                </div>
+                <div class="icon-stack">
+                    <div class="w-icon">🌧️</div>
+                    <div class="alt-tag">해발 2600m</div>
+                </div>
+            </div>
+            
+            <div class="card ">
+                <div class="loc-info">
+                    <h2>카인디 호수</h2>
+                    <div class="condition">구름조금</div>
+                    <div class="temps">
+                        <span class="temp-high">17°</span>
+                        <span class="temp-low">/ 7°</span>
+                    </div>
+                </div>
+                <div class="icon-stack">
+                    <div class="w-icon">⛅</div>
+                    <div class="alt-tag">해발 2000m</div>
+                </div>
+            </div>
+            
+            <div class="card ">
+                <div class="loc-info">
+                    <h2>콜사이 호수</h2>
+                    <div class="condition">흐림</div>
+                    <div class="temps">
+                        <span class="temp-high">18°</span>
+                        <span class="temp-low">/ 8°</span>
+                    </div>
+                </div>
+                <div class="icon-stack">
+                    <div class="w-icon">☁️</div>
+                    <div class="alt-tag">해발 1800m</div>
+                </div>
+            </div>
+            
+            <div class="card ">
+                <div class="loc-info">
+                    <h2>차른캐년</h2>
+                    <div class="condition">맑음</div>
+                    <div class="temps">
+                        <span class="temp-high">28°</span>
+                        <span class="temp-low">/ 15°</span>
+                    </div>
+                </div>
+                <div class="icon-stack">
+                    <div class="w-icon">☀️</div>
+                    <div class="alt-tag">해발 600m</div>
+                </div>
+            </div>
+            
+            <div class="card ">
+                <div class="loc-info">
+                    <h2>알틴에멜</h2>
+                    <div class="condition">맑음</div>
+                    <div class="temps">
+                        <span class="temp-high">26°</span>
+                        <span class="temp-low">/ 14°</span>
+                    </div>
+                </div>
+                <div class="icon-stack">
+                    <div class="w-icon">☀️</div>
+                    <div class="alt-tag">해발 1000m</div>
+                </div>
+            </div>
+            
         </div>
 
         <!-- Tour Advice Case-Sensitive Fix -->
@@ -317,9 +407,11 @@
             <div class="adv-content">
                 <h3>KAJATU TOUR ADVICE</h3>
                 <ul class="adv-list">
-                    {% for item in ai_advice_list %}
-                    <li class="adv-item">{{ item }}</li>
-                    {% endfor %}
+                    
+                    <li class="adv-item">차른캐년은 직사광선이 강하니 선글라스와 선크림을 챙기세요.</li>
+                    
+                    <li class="adv-item">아씨고원은 고도가 높아 기온이 낮으니 두꺼운 외투가 필요합니다.</li>
+                    
                 </ul>
             </div>
         </div>

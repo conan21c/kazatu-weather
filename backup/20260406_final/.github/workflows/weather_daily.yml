@@ -1,0 +1,33 @@
+name: Daily Weather Infographic Bot
+
+on:
+  schedule:
+    # 17:00 UTC = 22:00 Almaty time (UTC+5)
+    - cron: '0 17 * * *'
+  workflow_dispatch: # Allows manual trigger from github UI
+
+jobs:
+  run-weather-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps chromium
+
+      - name: Run Weather Bot
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python weather_bot.py
