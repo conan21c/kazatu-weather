@@ -1,6 +1,9 @@
 name: Daily Weather Infographic Bot
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # 17:00 UTC = 22:00 Almaty time (UTC+5)
     - cron: '0 17 * * *'
