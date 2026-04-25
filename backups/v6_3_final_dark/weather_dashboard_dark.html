@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajatu Weather - Dark Mode Final V6.3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Pretendard Variable', sans-serif;
+            letter-spacing: -0.05em;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            background-color: #020617;
+            width: 1080px;
+            margin: 0;
+            padding: 70px 50px;
+            color: #F8FAFC;
+        }
+        .card-container {
+            background: #0F172A;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .hero-container {
+            background: linear-gradient(145deg, #1E293B, #0F172A);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+        .prob-pill {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60A5FA;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-block;
+        }
+        .divider-v {
+            width: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 2.5rem;
+        }
+        .divider-h {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 1.25rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-[980px] mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-14">
+            <div class="text-[42px] font-extralight text-slate-500 mb-2 tracking-tighter leading-none">
+                알마티&주요 관광지
+            </div>
+            
+            <h1 class="text-[64px] font-black tracking-tighter text-white leading-none mb-6">
+                WEATHER <span class="text-blue-500">BRIEFING</span>
+            </h1>
+
+            <div class="flex items-center justify-center gap-4 mb-10">
+                <div class="text-[21px] font-extralight text-slate-500 tracking-tight leading-none">
+                    {{ date_str }} <span class="mx-1 opacity-30">|</span> {{ day_eng }}
+                </div>
+            </div>
+            
+            <div class="w-12 h-1 bg-blue-500 mx-auto rounded-full"></div>
+        </header>
+
+        <!-- Hero: Almaty (Enhanced Timeline Text) -->
+        {% set almaty = locations[0] %}
+        <div class="mb-6">
+            <div class="card-container hero-container border-l-4 border-l-blue-600">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h2 class="text-[36px] font-black text-white mb-1">{{ almaty.name }}</h2>
+                        <div class="text-[36px] font-extralight text-slate-400">
+                            {{ almaty.max }}° <span class="text-slate-600">/</span> {{ almaty.min }}°
+                        </div>
+                    </div>
+                    <div class="divider-v self-stretch"></div>
+                    <div class="flex-grow flex justify-between gap-4">
+                        {% for point in almaty.timeline %}
+                        <div class="timeline-item">
+                            <div class="text-[18px] font-extralight text-slate-400 mb-2">{{ point.time }}</div>
+                            <div class="text-[36px] mb-2">{{ point.icon }}</div>
+                            <div class="text-[24px] font-black text-white mb-1">{{ point.temp }}°</div>
+                            {% if point.prob >= 10 %}
+                            <div class="prob-pill">💧{{ point.prob }}%</div>
+                            {% else %}
+                            <div class="h-4"></div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tour Spots Grid (Enhanced Timeline Text) -->
+        <div class="grid grid-cols-2 gap-6">
+            {% for loc in locations[1:] %}
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <h3 class="text-[22px] font-black text-white">{{ loc.name }}</h3>
+                        <div class="text-[22px] font-extralight text-slate-400">
+                            {{ loc.max }}° <span class="text-slate-600">/</span> {{ loc.min }}°
+                        </div>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    {% for point in loc.timeline %}
+                    <div class="timeline-item">
+                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">{{ point.time }}</div>
+                        <div class="text-[28px] mb-1.5">{{ point.icon }}</div>
+                        <div class="text-[20px] font-black text-white mb-1">{{ point.temp }}°</div>
+                        {% if point.prob >= 10 %}
+                        <div class="prob-pill text-[10px]">💧{{ point.prob }}%</div>
+                        {% else %}
+                        <div class="h-4"></div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 pt-8 text-center">
+            <p class="text-[10px] font-bold text-slate-600 uppercase tracking-[0.4em] mb-4">
+                DATA SOURCE: ECMWF HIGH-PRECISION MODEL
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <div class="h-[1px] w-8 bg-slate-800"></div>
+                <div class="text-[16px] font-black text-slate-400 tracking-[0.5em] uppercase">
+                    KAJATU
+                </div>
+                <div class="h-[1px] w-8 bg-slate-800"></div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -155,7 +155,7 @@ def render_html_to_image(weather_data, ai_comment):
         page = browser.new_page(viewport={'width': 1080, 'height': 1500})
         page.goto("file://" + os.path.abspath("temp_render.html"))
         page.wait_for_timeout(1000) 
-        page.locator('#main-card').screenshot(path=img_path)
+        page.screenshot(path=img_path, full_page=True)
         browser.close()
         
     return img_path
