@@ -55,10 +55,21 @@ async def render_light_sample():
         ]}
     ]
 
+    ai_advice_list = [
+        "내일 알마티 시내는 오후 3시경 약한 비가 예상되니 우산을 준비하세요.",
+        "침블락과 아씨고원은 기온이 낮고 바람이 강하니 방한복을 꼭 챙기시기 바랍니다.",
+        "전반적으로 흐린 날씨지만 투어 활동에는 큰 지장이 없을 것으로 보입니다."
+    ]
+
     # Jinja2 setup
     env = Environment(loader=FileSystemLoader('/Users/kunhyangkim/Desktop/antigravity/weather/templates'))
     template = env.get_template('weather_dashboard_light.html')
-    html_content = template.render(date_str=date_str, day_eng=day_eng, locations=locations)
+    html_content = template.render(
+        date_str=date_str, 
+        day_eng=day_eng, 
+        locations=locations,
+        ai_advice_list=ai_advice_list
+    )
 
     with open('temp_light.html', 'w') as f:
         f.write(html_content)

@@ -149,6 +149,21 @@
             {% endfor %}
         </div>
 
+        <!-- Tour Advice -->
+        {% if ai_advice_list %}
+        <div class="mt-10 card-container bg-white border-l-8 border-l-blue-600">
+            <h3 class="text-[28px] font-black text-blue-600 mb-6 tracking-tight uppercase">KAJATU TOUR ADVICE</h3>
+            <ul class="flex flex-col gap-4">
+                {% for item in ai_advice_list %}
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">{{ item }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
         <!-- Footer -->
         <footer class="mt-20 pt-8 text-center">
             <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.4em] mb-4">

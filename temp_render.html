@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kajatu Weather - Dark Mode Final V6.4</title>
+    <title>Kajatu Weather - Light Mode Final V7.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
     <style>
@@ -12,57 +12,49 @@
             letter-spacing: -0.05em;
             -webkit-font-smoothing: antialiased;
         }
-        /* Browser Background (Outside Card) */
         body {
-            background-color: #F1F5F9; /* Light Slate for contrast */
+            background-color: #E2E8F0;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding: 50px 0; /* Vertical padding for boundary visibility */
+            padding: 50px 0;
         }
-        /* The Actual Weather Card Area */
         #main-card {
-            background-color: #020617;
+            background-color: #F8FAFC; /* Light gray background to separate from white cards */
             width: 1080px;
             padding: 70px 50px;
-            color: #F8FAFC;
-            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+            color: #1E293B;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             position: relative;
         }
         .card-container {
-            background: #0F172A;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #FFFFFF;
             border-radius: 1.5rem;
             padding: 1.5rem 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            /* Stronger shadow to pop out from the background */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
         .hero-container {
-            background: linear-gradient(145deg, #1E293B, #0F172A);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #FFFFFF;
+            /* Even stronger shadow for the hero card */
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.02);
         }
         .timeline-item {
             text-align: center;
             flex: 1;
         }
-        .prob-pill {
-            background: rgba(37, 99, 235, 0.2);
-            color: #60A5FA;
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 800;
-            display: inline-block;
-        }
         .divider-v {
             width: 1px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.06);
             margin: 0 2.5rem;
         }
         .divider-h {
             height: 1px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.06);
             margin: 1.25rem 0;
         }
     </style>
@@ -75,66 +67,73 @@
                 알마티&주요 관광지
             </div>
             
-            <h1 class="text-[64px] font-black tracking-tighter text-white leading-none mb-6">
-                WEATHER <span class="text-blue-500">BRIEFING</span>
+            <h1 class="text-[64px] font-black tracking-tighter text-slate-900 leading-none mb-6">
+                WEATHER <span class="text-blue-600">BRIEFING</span>
             </h1>
 
             <div class="flex items-center justify-center gap-4 mb-10">
-                <div class="text-[21px] font-extralight text-slate-500 tracking-tight leading-none">
-                    2026. 04. 27 <span class="mx-1 opacity-30">|</span> Monday
+                <div class="text-[36px] font-extralight text-slate-500 tracking-tight leading-none">
+                    2026. 04. 28 <span class="mx-1 opacity-30">|</span> Tuesday
                 </div>
             </div>
             
-            <div class="w-12 h-1 bg-blue-500 mx-auto rounded-full"></div>
+            <div class="w-12 h-1 bg-blue-600 mx-auto rounded-full"></div>
         </header>
 
         <!-- Hero: Almaty -->
         
         <div class="mb-6">
-            <div class="card-container hero-container border-l-4 border-l-blue-600">
+            <div class="card-container hero-container border-l-8 border-l-blue-600">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <h2 class="text-[36px] font-black text-white mb-1">알마티 시내</h2>
-                        <div class="text-[36px] font-extralight text-slate-400">
-                            19° <span class="text-slate-600">/</span> 11°
+                        <h2 class="text-[36px] font-black text-slate-900 mb-1">알마티 시내</h2>
+                        <div class="flex items-baseline gap-2 font-extralight">
+                            <span class="text-[72px] text-red-500 leading-none">20°</span>
+                            <span class="text-[36px] text-slate-300">/</span>
+                            <span class="text-[36px] text-blue-500 leading-none">11°</span>
                         </div>
                     </div>
                     <div class="divider-v self-stretch"></div>
                     <div class="flex-grow flex justify-between gap-4">
                         
                         <div class="timeline-item">
-                            <div class="text-[18px] font-extralight text-slate-400 mb-2">09:00</div>
-                            <div class="text-[36px] mb-2">⛅</div>
-                            <div class="text-[24px] font-black text-white mb-1">16°</div>
+                            <div class="text-[24px] font-extralight text-slate-500 mb-2">09:00</div>
+                            <div class="text-[40px] mb-2">☁️</div>
+                            <!-- Regular font weight instead of black -->
+                            <div class="text-[32px] font-normal text-slate-900 mb-2">16°</div>
                             
-                            <div class="h-4"></div>
-                            
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="text-[18px] font-extralight text-slate-400 mb-2">12:00</div>
-                            <div class="text-[36px] mb-2">☁️</div>
-                            <div class="text-[24px] font-black text-white mb-1">18°</div>
-                            
-                            <div class="h-4"></div>
+                            <!-- Larger font, removed box background -->
+                            <div class="text-[22px] font-bold text-blue-500 tracking-tight">💧12%</div>
                             
                         </div>
                         
                         <div class="timeline-item">
-                            <div class="text-[18px] font-extralight text-slate-400 mb-2">15:00</div>
-                            <div class="text-[36px] mb-2">☁️</div>
-                            <div class="text-[24px] font-black text-white mb-1">19°</div>
+                            <div class="text-[24px] font-extralight text-slate-500 mb-2">12:00</div>
+                            <div class="text-[40px] mb-2">☁️</div>
+                            <!-- Regular font weight instead of black -->
+                            <div class="text-[32px] font-normal text-slate-900 mb-2">18°</div>
                             
-                            <div class="prob-pill">💧13%</div>
+                            <div class="h-8"></div>
                             
                         </div>
                         
                         <div class="timeline-item">
-                            <div class="text-[18px] font-extralight text-slate-400 mb-2">18:00</div>
-                            <div class="text-[36px] mb-2">🌧️</div>
-                            <div class="text-[24px] font-black text-white mb-1">16°</div>
+                            <div class="text-[24px] font-extralight text-slate-500 mb-2">15:00</div>
+                            <div class="text-[40px] mb-2">⛅</div>
+                            <!-- Regular font weight instead of black -->
+                            <div class="text-[32px] font-normal text-slate-900 mb-2">20°</div>
                             
-                            <div class="prob-pill">💧45%</div>
+                            <div class="h-8"></div>
+                            
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="text-[24px] font-extralight text-slate-500 mb-2">18:00</div>
+                            <div class="text-[40px] mb-2">☁️</div>
+                            <!-- Regular font weight instead of black -->
+                            <div class="text-[32px] font-normal text-slate-900 mb-2">18°</div>
+                            
+                            <div class="h-8"></div>
                             
                         </div>
                         
@@ -144,14 +143,16 @@
         </div>
 
         <!-- Tour Spots Grid -->
-        <div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-2 gap-8">
             
             <div class="card-container">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-[22px] font-black text-white">침블락</h3>
-                        <div class="text-[22px] font-extralight text-slate-400">
-                            11° <span class="text-slate-600">/</span> 2°
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-[22px] font-black text-slate-900">침블락</h3>
+                        <div class="flex items-baseline gap-1.5 font-extralight">
+                            <span class="text-[44px] text-red-500 leading-none">10°</span>
+                            <span class="text-[22px] text-slate-300">/</span>
+                            <span class="text-[22px] text-blue-500 leading-none">1°</span>
                         </div>
                     </div>
                 </div>
@@ -159,38 +160,46 @@
                 <div class="flex justify-between gap-2">
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">09:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">10°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">09:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">9°</div>
                         
-                        <div class="h-4"></div>
-                        
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">12:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">11°</div>
-                        
-                        <div class="h-4"></div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧26%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">15:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">10°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">12:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
                         
-                        <div class="prob-pill text-[10px]">💧38%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧32%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">18:00</div>
-                        <div class="text-[28px] mb-1.5">🌧️</div>
-                        <div class="text-[20px] font-black text-white mb-1">7°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">15:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
                         
-                        <div class="prob-pill text-[10px]">💧78%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧47%</div>
+                        
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">18:00</div>
+                        <div class="text-[32px] mb-1.5">⛅</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">8°</div>
+                        
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧26%</div>
                         
                     </div>
                     
@@ -199,10 +208,12 @@
             
             <div class="card-container">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-[22px] font-black text-white">아씨고원</h3>
-                        <div class="text-[22px] font-extralight text-slate-400">
-                            14° <span class="text-slate-600">/</span> -1°
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-[22px] font-black text-slate-900">아씨고원</h3>
+                        <div class="flex items-baseline gap-1.5 font-extralight">
+                            <span class="text-[44px] text-red-500 leading-none">8°</span>
+                            <span class="text-[22px] text-slate-300">/</span>
+                            <span class="text-[22px] text-blue-500 leading-none">0°</span>
                         </div>
                     </div>
                 </div>
@@ -210,38 +221,46 @@
                 <div class="flex justify-between gap-2">
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">09:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">10°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">09:00</div>
+                        <div class="text-[32px] mb-1.5">❄️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">5°</div>
                         
-                        <div class="h-4"></div>
-                        
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">12:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">14°</div>
-                        
-                        <div class="h-4"></div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧47%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">15:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">11°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">12:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">6°</div>
                         
-                        <div class="prob-pill text-[10px]">💧26%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧76%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">18:00</div>
-                        <div class="text-[28px] mb-1.5">🌧️</div>
-                        <div class="text-[20px] font-black text-white mb-1">7°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">15:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">8°</div>
                         
-                        <div class="prob-pill text-[10px]">💧52%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧86%</div>
+                        
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">18:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">5°</div>
+                        
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧43%</div>
                         
                     </div>
                     
@@ -250,10 +269,12 @@
             
             <div class="card-container">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-[22px] font-black text-white">카인디 호수</h3>
-                        <div class="text-[22px] font-extralight text-slate-400">
-                            17° <span class="text-slate-600">/</span> 6°
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-[22px] font-black text-slate-900">카인디 호수</h3>
+                        <div class="flex items-baseline gap-1.5 font-extralight">
+                            <span class="text-[44px] text-red-500 leading-none">11°</span>
+                            <span class="text-[22px] text-slate-300">/</span>
+                            <span class="text-[22px] text-blue-500 leading-none">5°</span>
                         </div>
                     </div>
                 </div>
@@ -261,38 +282,46 @@
                 <div class="flex justify-between gap-2">
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">09:00</div>
-                        <div class="text-[28px] mb-1.5">🌤️</div>
-                        <div class="text-[20px] font-black text-white mb-1">15°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">09:00</div>
+                        <div class="text-[32px] mb-1.5">☔</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
                         
-                        <div class="h-4"></div>
-                        
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">12:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">17°</div>
-                        
-                        <div class="prob-pill text-[10px]">💧11%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧53%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">15:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">16°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">12:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
                         
-                        <div class="prob-pill text-[10px]">💧30%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧78%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">18:00</div>
-                        <div class="text-[28px] mb-1.5">🌧️</div>
-                        <div class="text-[20px] font-black text-white mb-1">12°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">15:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
                         
-                        <div class="prob-pill text-[10px]">💧33%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧96%</div>
+                        
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">18:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
+                        
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧60%</div>
                         
                     </div>
                     
@@ -301,10 +330,12 @@
             
             <div class="card-container">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-[22px] font-black text-white">콜사이 호수</h3>
-                        <div class="text-[22px] font-extralight text-slate-400">
-                            14° <span class="text-slate-600">/</span> 3°
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-[22px] font-black text-slate-900">콜사이 호수</h3>
+                        <div class="flex items-baseline gap-1.5 font-extralight">
+                            <span class="text-[44px] text-red-500 leading-none">10°</span>
+                            <span class="text-[22px] text-slate-300">/</span>
+                            <span class="text-[22px] text-blue-500 leading-none">2°</span>
                         </div>
                     </div>
                 </div>
@@ -312,38 +343,46 @@
                 <div class="flex justify-between gap-2">
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">09:00</div>
-                        <div class="text-[28px] mb-1.5">☀️</div>
-                        <div class="text-[20px] font-black text-white mb-1">13°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">09:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">8°</div>
                         
-                        <div class="h-4"></div>
-                        
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">12:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">14°</div>
-                        
-                        <div class="prob-pill text-[10px]">💧10%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧38%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">15:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">13°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">12:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">9°</div>
                         
-                        <div class="prob-pill text-[10px]">💧35%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧65%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">18:00</div>
-                        <div class="text-[28px] mb-1.5">🌧️</div>
-                        <div class="text-[20px] font-black text-white mb-1">10°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">15:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">10°</div>
                         
-                        <div class="prob-pill text-[10px]">💧60%</div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧96%</div>
+                        
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">18:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">9°</div>
+                        
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧56%</div>
                         
                     </div>
                     
@@ -352,10 +391,12 @@
             
             <div class="card-container">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-[22px] font-black text-white">차른캐년</h3>
-                        <div class="text-[22px] font-extralight text-slate-400">
-                            24° <span class="text-slate-600">/</span> 10°
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-[22px] font-black text-slate-900">차른캐년</h3>
+                        <div class="flex items-baseline gap-1.5 font-extralight">
+                            <span class="text-[44px] text-red-500 leading-none">18°</span>
+                            <span class="text-[22px] text-slate-300">/</span>
+                            <span class="text-[22px] text-blue-500 leading-none">11°</span>
                         </div>
                     </div>
                 </div>
@@ -363,38 +404,46 @@
                 <div class="flex justify-between gap-2">
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">09:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">20°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">09:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">16°</div>
                         
-                        <div class="h-4"></div>
-                        
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">12:00</div>
-                        <div class="text-[28px] mb-1.5">⛅</div>
-                        <div class="text-[20px] font-black text-white mb-1">23°</div>
-                        
-                        <div class="h-4"></div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧30%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">15:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">23°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">12:00</div>
+                        <div class="text-[32px] mb-1.5">🌧️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">17°</div>
                         
-                        <div class="h-4"></div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧35%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">18:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">19°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">15:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">18°</div>
                         
-                        <div class="h-4"></div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧45%</div>
+                        
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">18:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">18°</div>
+                        
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧34%</div>
                         
                     </div>
                     
@@ -403,10 +452,12 @@
             
             <div class="card-container">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <h3 class="text-[22px] font-black text-white">알틴에멜</h3>
-                        <div class="text-[22px] font-extralight text-slate-400">
-                            25° <span class="text-slate-600">/</span> 13°
+                    <div class="flex flex-col gap-1">
+                        <h3 class="text-[22px] font-black text-slate-900">알틴에멜</h3>
+                        <div class="flex items-baseline gap-1.5 font-extralight">
+                            <span class="text-[44px] text-red-500 leading-none">24°</span>
+                            <span class="text-[22px] text-slate-300">/</span>
+                            <span class="text-[22px] text-blue-500 leading-none">14°</span>
                         </div>
                     </div>
                 </div>
@@ -414,38 +465,43 @@
                 <div class="flex justify-between gap-2">
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">09:00</div>
-                        <div class="text-[28px] mb-1.5">🌤️</div>
-                        <div class="text-[20px] font-black text-white mb-1">20°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">09:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">19°</div>
                         
-                        <div class="h-4"></div>
-                        
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">12:00</div>
-                        <div class="text-[28px] mb-1.5">⛅</div>
-                        <div class="text-[20px] font-black text-white mb-1">24°</div>
-                        
-                        <div class="h-4"></div>
+                        <!-- Larger font, removed box background -->
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧11%</div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">15:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">24°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">12:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">22°</div>
                         
-                        <div class="h-4"></div>
+                        <div class="h-7"></div>
                         
                     </div>
                     
                     <div class="timeline-item">
-                        <div class="text-[16px] font-extralight text-slate-500 mb-1.5">18:00</div>
-                        <div class="text-[28px] mb-1.5">☁️</div>
-                        <div class="text-[20px] font-black text-white mb-1">21°</div>
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">15:00</div>
+                        <div class="text-[32px] mb-1.5">☁️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">23°</div>
                         
-                        <div class="h-4"></div>
+                        <div class="h-7"></div>
+                        
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">18:00</div>
+                        <div class="text-[32px] mb-1.5">🌤️</div>
+                        <!-- Regular font weight -->
+                        <div class="text-[26px] font-normal text-slate-900 mb-2">21°</div>
+                        
+                        <div class="h-7"></div>
                         
                     </div>
                     
@@ -456,15 +512,15 @@
 
         <!-- Footer -->
         <footer class="mt-20 pt-8 text-center">
-            <p class="text-[10px] font-bold text-slate-600 uppercase tracking-[0.4em] mb-4">
+            <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.4em] mb-4">
                 DATA SOURCE: ECMWF HIGH-PRECISION MODEL
             </p>
             <div class="flex items-center justify-center gap-4">
-                <div class="h-[1px] w-8 bg-slate-800"></div>
-                <div class="text-[16px] font-black text-slate-400 tracking-[0.5em] uppercase">
+                <div class="h-[1px] w-8 bg-slate-300"></div>
+                <div class="text-[18px] font-black text-slate-600 tracking-[0.5em] uppercase">
                     KAJATU
                 </div>
-                <div class="h-[1px] w-8 bg-slate-800"></div>
+                <div class="h-[1px] w-8 bg-slate-300"></div>
             </div>
         </footer>
     </div>
