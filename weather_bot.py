@@ -180,7 +180,7 @@ def fetch_weekly_forecast():
         f"?latitude={lats}&longitude={lons}"
         f"&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
         f"&timezone=Asia%2FAlmaty"
-        f"&forecast_days=9"
+        f"&forecast_days=8"
     )
     
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -189,9 +189,9 @@ def fetch_weekly_forecast():
     
     is_multi = isinstance(data, list)
     
-    # 날짜 계산: 모레(index 2)부터 7일
+    # 날짜 계산: 모레(index 2)부터 5일
     start_idx = 2  # index 0=오늘, 1=내일(카드❶), 2=모레(카드❷ 시작)
-    num_days = 7
+    num_days = 5
     
     results = []
     for i, loc in enumerate(LOCATIONS):
@@ -233,7 +233,7 @@ def fetch_weekly_forecast():
 def generate_weekly_advice(weekly_data):
     """주간 날씨 데이터를 기반으로 AI 주간 조언을 생성합니다."""
     if not GEMINI_API_KEY:
-        return "향후 7일간 지역별 날씨 예보를 확인하시고 투어 계획에 참고하세요."
+        return "향후 5일간 지역별 날씨 예보를 확인하시고 투어 계획에 참고하세요."
     
     try:
         from google import genai
@@ -249,12 +249,12 @@ def generate_weekly_advice(weekly_data):
         
         prompt = f"""
         당신은 카자흐스탄 전문 여행 가이드입니다.
-        향후 7일간 투어 지역별 일일 날씨 예보 데이터:
+        향후 5일간 투어 지역별 일일 날씨 예보 데이터:
         {chr(10).join(data_summary)}
         
         [지시사항]
         1. 뻔한 인사말이나 장황한 설명은 절대 금지합니다.
-        2. 7일 전체를 조망하여, 투어 계획 수립에 도움이 되는 핵심 조언을 하세요.
+        2. 5일 전체를 조망하여, 투어 계획 수립에 도움이 되는 핵심 조언을 하세요.
         3. 어떤 날이 투어하기 좋은지, 어떤 날은 피해야 하는지 명확히 짚어주세요.
         4. 산악지대(침블락, 아씨고원)와 저지대(차른캐년, 알틴에멜)의 기상 차이를 고려하세요.
         5. 실전적인 핵심 조언 2~3줄로만 작성하세요. (최대한 짧고 임팩트 있게)
@@ -268,7 +268,7 @@ def generate_weekly_advice(weekly_data):
         return response.text.strip()
     except Exception as e:
         print(f"Gemini API Error (weekly): {e}")
-        return "향후 7일간 지역별 날씨 예보입니다. 강수 확률이 높은 날은 실내 활동이나 저지대 투어를 권장합니다."
+        return "향후 5일간 지역별 날씨 예보입니다. 강수 확률이 높은 날은 실내 활동이나 저지대 투어를 권장합니다."
 
 def render_forecast_card(weekly_data, weekly_advice):
     """카드 ❷: 주간 예보 카드 렌더링"""
@@ -278,7 +278,7 @@ def render_forecast_card(weekly_data, weekly_advice):
         last_day = weekly_data[0]['forecast'][-1]
         
         start_date = datetime.now() + timedelta(days=2)
-        end_date = start_date + timedelta(days=6)
+        end_date = start_date + timedelta(days=4)
         
         date_range = (
             f"{start_date.strftime('%Y. %m. %d')}"
@@ -294,7 +294,7 @@ def render_forecast_card(weekly_data, weekly_advice):
                      for line in weekly_advice.split("\n") if line.strip()]
     
     env = FileSystemLoader('templates')
-    template = Environment(loader=env).get_template('weather_forecast_light.html')
+    template = Environment(loader=env).get_template('weather_forecast_light_v2.html')
     html_content = template.render(
         date_range=date_range,
         locations=weekly_data,
