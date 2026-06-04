@@ -157,7 +157,7 @@ def render_daily_card(weather_data, ai_comment):
     img_path = "daily_weather_card.png"
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page(viewport={'width': 1080, 'height': 1800})
+        page = browser.new_page(viewport={'width': 1080, 'height': 1800}, device_scale_factor=2)
         page.goto("file://" + os.path.abspath("temp_render.html"))
         page.wait_for_timeout(1000) 
         page.locator('#main-card').screenshot(path=img_path)
@@ -307,7 +307,7 @@ def render_forecast_card(weekly_data, weekly_advice):
     img_path = "forecast_weather_card.png"
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page(viewport={'width': 1080, 'height': 3000})
+        page = browser.new_page(viewport={'width': 1080, 'height': 3000}, device_scale_factor=2)
         page.goto("file://" + os.path.abspath("temp_forecast_render.html"))
         page.wait_for_timeout(1500)
         page.locator('#main-card').screenshot(path=img_path)
