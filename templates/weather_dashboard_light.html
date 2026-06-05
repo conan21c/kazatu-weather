@@ -97,13 +97,11 @@
                     <div class="flex-grow flex justify-between gap-4">
                         {% for point in almaty.timeline %}
                         <div class="timeline-item">
-                            <div class="text-[24px] font-extralight text-slate-500 mb-2">{{ point.time }}</div>
+                            <div class="text-[24px] font-extralight text-slate-900 mb-2">{{ point.time }}</div>
                             <div class="text-[40px] mb-2">{{ point.icon }}</div>
-                            <!-- Regular font weight instead of black -->
-                            <div class="text-[32px] font-normal text-slate-900 mb-2">{{ point.temp }}°</div>
+                            <div class="text-[32px] font-light text-slate-900 mb-2">{{ point.temp }}°</div>
                             {% if point.prob >= 10 %}
-                            <!-- Larger font, removed box background -->
-                            <div class="text-[22px] font-bold text-blue-500 tracking-tight">💧{{ point.prob }}%</div>
+                            <div class="text-[22px] font-light text-slate-500 tracking-tight" style="display:flex;align-items:center;justify-content:center;gap:3px"><svg width="14" height="18" viewBox="0 0 12 16" fill="none" stroke="#94a3b8" stroke-width="1.5" style="flex-shrink:0"><path d="M6 1C6 1 1 7 1 10a5 5 0 0 0 10 0C11 7 6 1 6 1Z"/></svg>{{ point.prob }}%</div>
                             {% else %}
                             <div class="h-8"></div>
                             {% endif %}
@@ -132,13 +130,11 @@
                 <div class="flex justify-between gap-2">
                     {% for point in loc.timeline %}
                     <div class="timeline-item">
-                        <div class="text-[20px] font-extralight text-slate-500 mb-1.5">{{ point.time }}</div>
+                        <div class="text-[20px] font-extralight text-slate-900 mb-1.5">{{ point.time }}</div>
                         <div class="text-[32px] mb-1.5">{{ point.icon }}</div>
-                        <!-- Regular font weight -->
-                        <div class="text-[26px] font-normal text-slate-900 mb-2">{{ point.temp }}°</div>
+                        <div class="text-[26px] font-light text-slate-900 mb-2">{{ point.temp }}°</div>
                         {% if point.prob >= 10 %}
-                        <!-- Larger font, removed box background -->
-                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧{{ point.prob }}%</div>
+                        <div class="text-[18px] font-light text-slate-500 tracking-tight" style="display:flex;align-items:center;justify-content:center;gap:2px"><svg width="11" height="15" viewBox="0 0 12 16" fill="none" stroke="#94a3b8" stroke-width="1.5" style="flex-shrink:0"><path d="M6 1C6 1 1 7 1 10a5 5 0 0 0 10 0C11 7 6 1 6 1Z"/></svg>{{ point.prob }}%</div>
                         {% else %}
                         <div class="h-7"></div>
                         {% endif %}

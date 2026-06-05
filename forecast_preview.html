@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajatu Weather - Extended Forecast Light</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Pretendard Variable', sans-serif;
+            letter-spacing: -0.05em;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            background-color: #E2E8F0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 50px 0;
+        }
+        #main-card {
+            background-color: #F8FAFC;
+            width: 1080px;
+            padding: 70px 50px;
+            color: #1E293B;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .card-container {
+            background: #FFFFFF;
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .hero-container {
+            background: #FFFFFF;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .day-col {
+            text-align: center;
+            flex: 1;
+            padding: 10px 2px 8px;
+            border-radius: 12px;
+        }
+        .day-col.precip-day {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .divider-h {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.06);
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-card">
+        <!-- Header -->
+        <header class="text-center mb-14">
+            <div class="text-[42px] font-extralight text-slate-500 mb-2 tracking-tighter leading-none">
+                알마티&주요 관광지
+            </div>
+            
+            <h1 class="text-[64px] font-black tracking-tighter text-slate-900 leading-none mb-6">
+                EXTENDED <span class="text-blue-600">FORECAST</span>
+            </h1>
+
+            <div class="flex items-center justify-center gap-4 mb-10">
+                <div class="text-[32px] font-extralight text-slate-500 tracking-tight leading-none">
+                    2026. 06. 06(토) ~ 06. 12(금)
+                </div>
+            </div>
+            
+            <div class="w-12 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        </header>
+
+        <!-- Hero: Almaty -->
+        
+        <div class="mb-5">
+            <div class="card-container hero-container border-l-8 border-l-blue-600">
+                <div class="flex items-center justify-between mb-1">
+                    <h2 class="text-[36px] font-black text-slate-900">알마티 시내</h2>
+                    <div class="flex items-baseline gap-2 font-extralight">
+                        <span class="text-[28px] text-red-500">30°</span>
+                        <span class="text-[20px] text-slate-300">/</span>
+                        <span class="text-[28px] text-blue-500">14°</span>
+                        <span class="text-[16px] text-slate-400 ml-1">주간</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[20px] mb-3 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[36px] mb-2">☀️</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">28°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">16°</div>
+                        
+                        <div class="h-7"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[20px] mb-3 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[36px] mb-2">🌤️</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">27°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">15°</div>
+                        
+                        <div class="h-7"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[20px] mb-3 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[36px] mb-2">⛅</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">25°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">14°</div>
+                        
+                        <div class="h-7"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[20px] mb-3 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[36px] mb-2">🌧️</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">22°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">15°</div>
+                        
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧65%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[20px] mb-3 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[36px] mb-2">☁️</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">24°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">14°</div>
+                        
+                        <div class="text-[18px] font-bold text-blue-500 tracking-tight">💧15%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[20px] mb-3 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[36px] mb-2">☀️</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">29°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">16°</div>
+                        
+                        <div class="h-7"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[20px] mb-3 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[36px] mb-2">☀️</div>
+                        <div class="text-[28px] font-normal text-red-500 leading-tight">30°</div>
+                        <div class="text-[22px] font-normal text-blue-500 leading-tight mb-2">17°</div>
+                        
+                        <div class="h-7"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub location strips (full-width) -->
+        
+        <div class="mb-5">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[24px] font-black text-slate-900">침블락</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[22px] text-red-500">18°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[22px] text-blue-500">2°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">16°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">5°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☁️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">14°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">4°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">12°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">3°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧70%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">10°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">2°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧85%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☁️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">13°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">3°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧12%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">17°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">5°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">18°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">6°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-5">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[24px] font-black text-slate-900">아씨고원</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[22px] text-red-500">16°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[22px] text-blue-500">-3°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">14°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">0°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">13°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">-1°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[30px] mb-1.5">❄️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">8°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">-3°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧75%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">10°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">-2°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧55%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☁️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">11°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">-1°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧10%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">15°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">1°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">16°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">2°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-5">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[24px] font-black text-slate-900">카인디 호수</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[22px] text-red-500">22°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[22px] text-blue-500">4°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">20°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">7°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌤️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">19°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">6°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">16°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">5°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧50%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">15°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">4°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧72%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☁️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">17°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">5°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">21°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">8°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">22°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">9°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-5">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[24px] font-black text-slate-900">콜사이 호수</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[22px] text-red-500">20°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[22px] text-blue-500">2°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">18°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">5°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">17°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">4°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">14°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">3°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧60%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌧️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">13°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">2°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧80%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☁️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">15°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">3°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧10%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">19°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">6°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">20°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">7°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-5">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[24px] font-black text-slate-900">차른캐년</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[22px] text-red-500">35°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[22px] text-blue-500">14°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">33°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">18°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">34°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">19°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">30°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">16°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☁️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">28°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">14°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧15%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">31°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">16°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">34°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">19°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">35°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">20°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-5">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[24px] font-black text-slate-900">알틴에멜</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[22px] text-red-500">36°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[22px] text-blue-500">16°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-1">
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/6(토)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">34°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">19°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-bold text-red-400">
+                            6/7(일)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">35°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">20°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/8(월)
+                        </div>
+                        <div class="text-[30px] mb-1.5">🌤️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">31°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">17°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/9(화)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">29°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">16°</div>
+                        
+                        <div class="text-[14px] font-bold text-blue-500 tracking-tight">💧10%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/10(수)
+                        </div>
+                        <div class="text-[30px] mb-1.5">⛅</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">32°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">18°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/11(목)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">35°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">20°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <div class="text-[17px] mb-2 font-extralight text-slate-500">
+                            6/12(금)
+                        </div>
+                        <div class="text-[30px] mb-1.5">☀️</div>
+                        <div class="text-[24px] font-normal text-red-500 leading-tight">36°</div>
+                        <div class="text-[18px] font-normal text-blue-500 leading-tight mb-1.5">21°</div>
+                        
+                        <div class="h-5"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Weekly AI Advice -->
+        
+        <div class="mt-10 card-container bg-white border-l-8 border-l-blue-600">
+            <h3 class="text-[28px] font-black text-blue-600 mb-6 tracking-tight uppercase">KAJATU WEEKLY ADVICE</h3>
+            <ul class="flex flex-col gap-4">
+                
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">주 중반 산악지역(침블락·아씨고원·카인디·콜사이) 비/눈 집중, 이 기간엔 저지대(차른·알틴에멜) 투어 권장</span>
+                </li>
+                
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">아씨고원 적설 5cm 예상일에는 도로 상태 확인 필수, 방한장비 및 4WD 차량 준비</span>
+                </li>
+                
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">주 후반 전 지역 맑음 회복, 특히 차른캐년·알틴에멜은 35°C 이상 고온 예상 — 충분한 수분 섭취 필수</span>
+                </li>
+                
+            </ul>
+        </div>
+        
+
+        <!-- Footer -->
+        <footer class="mt-20 pt-8 text-center">
+            <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.4em] mb-4">
+                DATA SOURCE: ECMWF HIGH-PRECISION MODEL
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <div class="h-[1px] w-8 bg-slate-300"></div>
+                <div class="text-[18px] font-black text-slate-600 tracking-[0.5em] uppercase">
+                    KAJATU
+                </div>
+                <div class="h-[1px] w-8 bg-slate-300"></div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Git 버그 프리징 전략 — v1.0
+# CriticalRedSystem 프로젝트 표준
+
+[core]
+	attribute = text, .txt -> diff=wordlimit whitespace=nowraps
+	attribute = binary, .png -> diff=binary
+	attribute = binary, .jpg -> diff=binary
+	attribute = eol-crlf, *.css -> diff=crlf text=eol-crlf
+	attribute = binary, *.svg -> diff=binary
+
+[diff]
+	crlf = false
+
+[mime]
+	pattern = .css
+	regex = .*\.css$
+	text/eoL-crlf = true
+
+# CriticalRedSystem 전용 — 모바일 퍼스트 스타일
+# Mobile-First: 320px 기준 리액티브 레이아웃
+[core]
+	attribute = text, index.html -> diff=wordlimit whitespace=nowraps

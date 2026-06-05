@@ -294,7 +294,7 @@ def render_forecast_card(weekly_data, weekly_advice):
                      for line in weekly_advice.split("\n") if line.strip()]
     
     env = FileSystemLoader('templates')
-    template = Environment(loader=env).get_template('weather_forecast_light_v2.html')
+    template = Environment(loader=env).get_template('forecast_option_a.html')
     html_content = template.render(
         date_range=date_range,
         locations=weekly_data,

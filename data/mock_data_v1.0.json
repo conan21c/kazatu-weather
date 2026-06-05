@@ -1,0 +1,127 @@
+{
+  "dataset_version": "v1.0",
+  "generated_at": "2026-06-04T14:35:00Z",
+  "description": "Critical Red 경고 시스템 테스트용 모의 데이터셋",
+
+  "summary": {
+    "critical_alert_active": true,
+    "current_risk_level": "HIGH",
+    "target_reach_goal_met_percentage": 87.4,
+    "emergency_threshold_crossed": true
+  },
+
+  "1_time_series_data": {
+    "description": "시간 흐름에 따른 주요 지표 추이 (Critical Red 추적용)",
+    "unit": "daily",
+    "metrics": [
+      {
+        "date": "2026-06-04",
+        "blog_visitors": 312,
+        "youthube_views": 8450,
+        "shorfs_engagement_rate": 9.4,
+        "conversion_funnel_dropoff": 12.3
+      },
+      {
+        "date": "2026-06-03",
+        "blog_visitors": 285,
+        "youthube_views": 7800,
+        "shorfs_engagement_rate": 8.9,
+        "conversion_funnel_dropoff": 14.1
+      },
+      {
+        "date": "2026-06-02",
+        "blog_visitors": 260,
+        "youthube_views": 7200,
+        "shorfs_engagement_rate": 8.5,
+        "conversion_funnel_dropoff": 15.8
+      },
+      {
+        "date": "2026-06-01",
+        "blog_visitors": 240,
+        "youthube_views": 6900,
+        "shorfs_engagement_rate": 7.8,
+        "conversion_funnel_dropoff": 17.2
+      },
+      {
+        "date": "2026-05-31",
+        "blog_visitors": 220,
+        "youthube_views": 6500,
+        "shorfs_engagement_rate": 7.2,
+        "conversion_funnel_dropoff": 18.5
+      }
+    ]
+  },
+
+  "2_comparative_gap_data": {
+    "description": "경쟁사 및 목표 대비 격차 분석 (Critical Red 경고 트리거용)",
+    "benchmark_target": 500,
+    "gap_analysis": [
+      {
+        "category": "daily_blog_visitors",
+        "current_value": 312,
+        "target_value": 500,
+        "percentage_reached": 62.4,
+        "status": "WARNING"
+      },
+      {
+        "category": "avg_youtube_views_per_video",
+        "current_value": 7800,
+        "industry_avg": 5000,
+        "gap_percentage_vs_avg": 56.0,
+        "status": "GREEN"
+      },
+      {
+        "category": "content_production_efficiency",
+        "current_hours_per_video": 4.2,
+        "target_max_hours": 8.0,
+        "efficiency_ratio": 0.525,
+        "status": "CRITICAL"
+      }
+    ]
+  },
+
+  "3_categorical_risk_index": {
+    "description": "위험도 분류 및 등급 지수 (Critical Red 시각화용)",
+    "thresholds": {
+      "critical_red": ">85",
+      "warning_orange": "70~85",
+      "info_green": "<70"
+    },
+    "risk_categories": [
+      {
+        "id": "RISK_CONTENT_RELEVANCE",
+        "name": "콘텐츠 적합도 위험도",
+        "current_index": 94.2,
+        "classification": "CRITICAL_RED",
+        "action_required": "즉시 수정 필요"
+      },
+      {
+        "id": "RISK_AUDIENCE_RETENTION",
+        "name": "청중 유지율 위험도",
+        "current_index": 76.5,
+        "classification": "WARNING_ORANGE",
+        "action_required": "3 일 이내 개선"
+      },
+      {
+        "id": "RISK_CONVERSION_RATE",
+        "name": "전환율 위험도",
+        "current_index": 82.1,
+        "classification": "CRITICAL_RED",
+        "action_required": "즉시 수정 필요"
+      },
+      {
+        "id": "RISK_TECHNICAL_STABILITY",
+        "name": "기술적 안정성 위험도",
+        "current_index": 65.3,
+        "classification": "INFO_GREEN",
+        "action_required": "계속 모니터링"
+      }
+    ]
+  },
+
+  "critical_red_alert_message": {
+    "triggered_by": "high_risk_index_values",
+    "message": "[CRITICAL] 위험도 지수가 85 를 초과하여 Critical Red 경고 시스템이 활성화되었습니다. 즉각적인 개입이 필요합니다.",
+    "urgency_level": "IMMEDIATE"
+  }
+}

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kajatu Weather - Extended Forecast Light v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Pretendard Variable', sans-serif;
+            letter-spacing: -0.05em;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            background-color: #E2E8F0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 50px 0;
+        }
+        #main-card {
+            background-color: #F8FAFC;
+            width: 1080px;
+            padding: 70px 50px;
+            color: #1E293B;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .card-container {
+            background: #FFFFFF;
+            border-radius: 1.5rem;
+            padding: 1.8rem 2.2rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .hero-container {
+            background: #FFFFFF;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .day-col {
+            text-align: center;
+            flex: 1;
+            padding: 14px 6px 12px;
+            border-radius: 14px;
+        }
+        .day-col.precip-day {
+            background: rgba(59, 130, 246, 0.06);
+        }
+        .divider-h {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.06);
+            margin: 1rem 0;
+        }
+        .temp-inline {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-card">
+        <!-- Header -->
+        <header class="text-center mb-14">
+            <div class="text-[42px] font-extralight text-slate-500 mb-2 tracking-tighter leading-none">
+                알마티&주요 관광지
+            </div>
+            
+            <h1 class="text-[64px] font-black tracking-tighter text-slate-900 leading-none mb-6">
+                EXTENDED <span class="text-blue-600">FORECAST</span>
+            </h1>
+
+            <div class="flex items-center justify-center gap-4 mb-10">
+                <div class="text-[32px] font-extralight text-slate-500 tracking-tight leading-none">
+                    2026. 06. 07(일) ~ 06. 11(목)
+                </div>
+            </div>
+            
+            <div class="w-12 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        </header>
+
+        <!-- Hero: Almaty -->
+        
+        <div class="mb-6">
+            <div class="card-container hero-container border-l-8 border-l-blue-600">
+                <div class="flex items-center justify-between mb-1">
+                    <h2 class="text-[36px] font-black text-slate-900">알마티 시내</h2>
+                    <div class="flex items-baseline gap-2 font-extralight">
+                        <span class="text-[28px] text-red-500">31°</span>
+                        <span class="text-[20px] text-slate-300">/</span>
+                        <span class="text-[28px] text-blue-500">14°</span>
+                        <span class="text-[16px] text-slate-400 ml-1">주간</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[26px] font-medium leading-none">6/7</div>
+                            <div class="text-[20px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[40px] my-3">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-2">
+                            <span class="text-[34px] font-semibold text-red-500">25°</span>
+                            <span class="text-[20px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[26px] font-normal text-blue-500">15°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-8"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[26px] font-medium leading-none">6/8</div>
+                            <div class="text-[20px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[40px] my-3">⛅</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-2">
+                            <span class="text-[34px] font-semibold text-red-500">29°</span>
+                            <span class="text-[20px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[26px] font-normal text-blue-500">14°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-8"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[26px] font-medium leading-none">6/9</div>
+                            <div class="text-[20px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[40px] my-3">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-2">
+                            <span class="text-[34px] font-semibold text-red-500">31°</span>
+                            <span class="text-[20px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[26px] font-normal text-blue-500">14°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-8"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[26px] font-medium leading-none">6/10</div>
+                            <div class="text-[20px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[40px] my-3">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-2">
+                            <span class="text-[34px] font-semibold text-red-500">29°</span>
+                            <span class="text-[20px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[26px] font-normal text-blue-500">17°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[22px] font-bold text-blue-600 tracking-tight">💧39%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[26px] font-medium leading-none">6/11</div>
+                            <div class="text-[20px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[40px] my-3">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-2">
+                            <span class="text-[34px] font-semibold text-red-500">26°</span>
+                            <span class="text-[20px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[26px] font-normal text-blue-500">18°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-8"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub location strips (full-width) -->
+        
+        <div class="mb-6">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[28px] font-black text-slate-900">침블락</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[24px] text-red-500">20°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[24px] text-blue-500">4°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[22px] font-medium leading-none">6/7</div>
+                            <div class="text-[17px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☔</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">13°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">6°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧92%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/8</div>
+                            <div class="text-[17px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">17°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">6°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧84%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/9</div>
+                            <div class="text-[17px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">20°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">4°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧33%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/10</div>
+                            <div class="text-[17px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">16°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">7°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧90%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/11</div>
+                            <div class="text-[17px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">14°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">7°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧86%</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[28px] font-black text-slate-900">아씨고원</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[24px] text-red-500">17°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[24px] text-blue-500">0°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[22px] font-medium leading-none">6/7</div>
+                            <div class="text-[17px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">12°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">4°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧98%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/8</div>
+                            <div class="text-[17px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">15°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">4°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧84%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/9</div>
+                            <div class="text-[17px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">17°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">0°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧92%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/10</div>
+                            <div class="text-[17px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">16°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">3°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧99%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/11</div>
+                            <div class="text-[17px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">15°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">4°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧98%</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[28px] font-black text-slate-900">카인디 호수</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[24px] text-red-500">23°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[24px] text-blue-500">8°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[22px] font-medium leading-none">6/7</div>
+                            <div class="text-[17px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">16°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">10°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧97%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/8</div>
+                            <div class="text-[17px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">18°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">8°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧100%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/9</div>
+                            <div class="text-[17px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">23°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">10°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧89%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/10</div>
+                            <div class="text-[17px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">21°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">11°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧98%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/11</div>
+                            <div class="text-[17px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">20°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">10°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧99%</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[28px] font-black text-slate-900">콜사이 호수</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[24px] text-red-500">20°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[24px] text-blue-500">7°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[22px] font-medium leading-none">6/7</div>
+                            <div class="text-[17px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">14°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">9°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧98%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/8</div>
+                            <div class="text-[17px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">17°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">7°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧97%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/9</div>
+                            <div class="text-[17px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">20°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">9°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧90%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/10</div>
+                            <div class="text-[17px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☔</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">19°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">10°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧98%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/11</div>
+                            <div class="text-[17px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">17°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">9°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧98%</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[28px] font-black text-slate-900">차른캐년</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[24px] text-red-500">29°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[24px] text-blue-500">13°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[22px] font-medium leading-none">6/7</div>
+                            <div class="text-[17px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">24°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">14°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧71%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/8</div>
+                            <div class="text-[17px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">26°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">13°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧45%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/9</div>
+                            <div class="text-[17px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">28°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">14°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧30%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/10</div>
+                            <div class="text-[17px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">29°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">16°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧76%</div>
+                        
+                    </div>
+                    
+                    <div class="day-col precip-day">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/11</div>
+                            <div class="text-[17px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">28°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">16°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="text-[18px] font-bold text-blue-600 tracking-tight">💧65%</div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="card-container">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-[28px] font-black text-slate-900">알틴에멜</h3>
+                    <div class="flex items-baseline gap-1.5 font-extralight">
+                        <span class="text-[24px] text-red-500">33°</span>
+                        <span class="text-[16px] text-slate-300">/</span>
+                        <span class="text-[24px] text-blue-500">17°</span>
+                    </div>
+                </div>
+                <div class="divider-h"></div>
+                <div class="flex justify-between gap-2">
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-red-400">
+                            <div class="text-[22px] font-medium leading-none">6/7</div>
+                            <div class="text-[17px] font-light mt-0.5">일</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☁️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">28°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">17°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-6"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/8</div>
+                            <div class="text-[17px] font-light mt-0.5">월</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">⛅</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">30°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">18°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-6"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/9</div>
+                            <div class="text-[17px] font-light mt-0.5">화</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">☀️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">33°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">19°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-6"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/10</div>
+                            <div class="text-[17px] font-light mt-0.5">수</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">32°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">20°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-6"></div>
+                        
+                    </div>
+                    
+                    <div class="day-col ">
+                        <!-- 날짜: 요일 분리 표기 -->
+                        <div class="mb-1 text-slate-500">
+                            <div class="text-[22px] font-medium leading-none">6/11</div>
+                            <div class="text-[17px] font-light mt-0.5">목</div>
+                        </div>
+                        <!-- 아이콘 -->
+                        <div class="text-[34px] my-2">🌧️</div>
+                        <!-- 기온: 인라인 -->
+                        <div class="temp-inline mb-1.5">
+                            <span class="text-[28px] font-semibold text-red-500">28°</span>
+                            <span class="text-[16px] text-slate-300 mx-0.5">/</span>
+                            <span class="text-[22px] font-normal text-blue-500">20°</span>
+                        </div>
+                        <!-- 강수확률: 30% 이상만 -->
+                        
+                        <div class="h-6"></div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Weekly AI Advice -->
+        
+        <div class="mt-10 card-container bg-white border-l-8 border-l-blue-600">
+            <h3 class="text-[28px] font-black text-blue-600 mb-6 tracking-tight uppercase">KAJATU WEEKLY ADVICE</h3>
+            <ul class="flex flex-col gap-4">
+                
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">주 중반 산악지역 강수확률 높음, 저지대(차른·알틴에멜) 투어 권장</span>
+                </li>
+                
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">아씨고원·침블락은 비 그친 후 방문 시 맑은 경치 기대, 미끄러운 도로 주의</span>
+                </li>
+                
+                <li class="flex items-start gap-3 text-[24px] font-bold text-slate-800 leading-tight">
+                    <span class="text-blue-600 mt-1">•</span>
+                    <span class="flex-grow break-keep">주말 전 지역 기온 회복, 차른캐년 30°C 이상 고온 예상 — 수분 보충 필수</span>
+                </li>
+                
+            </ul>
+        </div>
+        
+
+        <!-- Footer -->
+        <footer class="mt-20 pt-8 text-center">
+            <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.4em] mb-4">
+                DATA SOURCE: ECMWF HIGH-PRECISION MODEL
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <div class="h-[1px] w-8 bg-slate-300"></div>
+                <div class="text-[18px] font-black text-slate-600 tracking-[0.5em] uppercase">
+                    KAJATU
+                </div>
+                <div class="h-[1px] w-8 bg-slate-300"></div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
