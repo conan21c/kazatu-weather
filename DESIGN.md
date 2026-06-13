@@ -113,3 +113,5 @@ Depth is conveyed through a hybrid of very soft ambient shadows and extremely th
 - **Don't** use `border-l-8` (side-tab borders) as a shortcut for making cards stand out.
 - **Don't** use raw, default Tailwind Slate grays (`bg-slate-200`, `bg-slate-50`).
 - **Don't** apply letter-spacing tighter than `-0.03em` to headlines (e.g. avoid Tailwind's default `tracking-tighter` on display sizes).
+- **Don't** mix weather icon sets (e.g. using an illustrative umbrella icon next to flat weather icons). Maintain strict icon system integrity.
+- **Don't** apply random background highlights to a single day. If highlighting 'Today', it must be consistently applied across all regional cards.

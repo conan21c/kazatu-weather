@@ -24,19 +24,103 @@ LOCATIONS = [
 
 WEEKDAY_KR = ['월', '화', '수', '목', '금', '토', '일']
 
+# ============================================================
+# SVG 아이콘 시스템 — OS/브라우저 무관 일관된 렌더링 보장
+# width/height="1em" → 부모 font-size에 비례해 자동 스케일
+# ============================================================
+_ICON_SUN = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" '
+    'stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round">'
+    '<circle cx="12" cy="12" r="4.5"/>'
+    '<line x1="12" y1="2" x2="12" y2="4.5"/>'
+    '<line x1="12" y1="19.5" x2="12" y2="22"/>'
+    '<line x1="2" y1="12" x2="4.5" y2="12"/>'
+    '<line x1="19.5" y1="12" x2="22" y2="12"/>'
+    '<line x1="4.93" y1="4.93" x2="6.76" y2="6.76"/>'
+    '<line x1="17.24" y1="17.24" x2="19.07" y2="19.07"/>'
+    '<line x1="19.07" y1="4.93" x2="17.24" y2="6.76"/>'
+    '<line x1="6.76" y1="17.24" x2="4.93" y2="19.07"/>'
+    '</svg>'
+)
+_ICON_PARTLY_CLOUDY = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<circle cx="9.5" cy="9.5" r="3.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<line x1="9.5" y1="2" x2="9.5" y2="3.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<line x1="3.5" y1="9.5" x2="5" y2="9.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<line x1="5.57" y1="5.57" x2="6.63" y2="6.63" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<line x1="13.43" y1="5.57" x2="12.37" y2="6.63" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<path d="M18 19H9a4 4 0 0 1-.5-7.96A5 5 0 0 1 18 14a3 3 0 0 1 0 5Z" stroke="#94A3B8" stroke-width="1.8" stroke-linejoin="round"/>'
+    '</svg>'
+)
+_ICON_CLOUDY = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<path d="M17.5 19H9a5 5 0 1 1 .9-9.9 7 7 0 0 1 13 2.1A3.5 3.5 0 0 1 17.5 19Z" '
+    'stroke="#94A3B8" stroke-width="1.8" stroke-linejoin="round"/>'
+    '</svg>'
+)
+_ICON_OVERCAST = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<path d="M4 14.9A7 7 0 1 1 15.7 8H17a5 5 0 0 1 1 9.9" '
+    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>'
+    '</svg>'
+)
+_ICON_FOG = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" '
+    'stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round">'
+    '<path d="M4 14.9A7 7 0 1 1 15.7 8H17a5 5 0 0 1 0 10H5"/>'
+    '<line x1="3" y1="20" x2="21" y2="20"/>'
+    '</svg>'
+)
+_ICON_RAIN = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<path d="M20 17.6A5 5 0 0 0 18 8h-1.3A7 7 0 1 0 4 14.9" '
+    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
+    '<line x1="8" y1="19" x2="8" y2="21" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
+    '<line x1="12" y1="17" x2="12" y2="19" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
+    '<line x1="16" y1="19" x2="16" y2="21" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
+    '<line x1="10" y1="21" x2="10" y2="23" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
+    '<line x1="14" y1="21" x2="14" y2="23" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
+    '</svg>'
+)
+_ICON_SNOW = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<path d="M20 17.6A5 5 0 0 0 18 8h-1.3A7 7 0 1 0 4 14.9" '
+    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<circle cx="8" cy="20" r="1.2" fill="#93C5FD"/>'
+    '<circle cx="12" cy="18.5" r="1.2" fill="#93C5FD"/>'
+    '<circle cx="16" cy="20" r="1.2" fill="#93C5FD"/>'
+    '<circle cx="10" cy="22.5" r="1.2" fill="#93C5FD"/>'
+    '<circle cx="14" cy="22.5" r="1.2" fill="#93C5FD"/>'
+    '</svg>'
+)
+_ICON_STORM = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<path d="M20 17.6A5 5 0 0 0 18 8h-1.3A7 7 0 1 0 4 14.9" '
+    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<polyline points="13,12 10,17 14,17 11,22" '
+    'stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+    '</svg>'
+)
+
 def get_weather_desc(code):
-    # WMO Weather interpretation codes (WMO) - Unified Line-Art Style
+    """WMO 날씨 코드 → (설명, SVG 아이콘 HTML 문자열) 반환.
+    SVG 아이콘은 1em 기준으로 부모 font-size에 비례해 렌더링됩니다.
+    이모지 대신 SVG를 사용하여 OS/Playwright 렌더러 무관 일관성 보장.
+    """
     weather_codes = {
-        0: ("맑음", "☀️"), 1: ("구름 조금", "🌤️"), 2: ("구름 많음", "⛅"), 3: ("흐림", "☁️"),
-        45: ("안개", "🌫️"), 48: ("안개", "🌫️"),
-        51: ("가벼운 비", "🌧️"), 53: ("이슬비", "🌧️"), 55: ("짙은 비", "🌧️"),
-        61: ("가벼운 비", "🌧️"), 63: ("보통 비", "☔"), 65: ("강한 비", "🌧️"),
-        71: ("가벼운 눈", "🌨️"), 73: ("보통 눈", "❄️"), 75: ("강한 눈", "❄️"),
-        77: ("눈발", "❄️"), 80: ("소나기", "🌧️"), 81: ("강한 소나기", "🌧️"), 
-        82: ("폭우", "⛈️"), 85: ("가벼운 눈", "🌨️"), 86: ("강한 눈", "❄️"),
-        95: ("천둥번개", "⛈️"), 96: ("천둥번개", "⛈️"), 99: ("천둥번개", "⛈️")
+        0: ("맑음", _ICON_SUN),
+        1: ("구름 조금", _ICON_PARTLY_CLOUDY),
+        2: ("구름 많음", _ICON_CLOUDY),
+        3: ("흐림", _ICON_OVERCAST),
+        45: ("안개", _ICON_FOG), 48: ("안개", _ICON_FOG),
+        51: ("가벼운 비", _ICON_RAIN), 53: ("이슬비", _ICON_RAIN), 55: ("짙은 비", _ICON_RAIN),
+        61: ("가벼운 비", _ICON_RAIN), 63: ("보통 비", _ICON_RAIN), 65: ("강한 비", _ICON_RAIN),
+        71: ("가벼운 눈", _ICON_SNOW), 73: ("보통 눈", _ICON_SNOW), 75: ("강한 눈", _ICON_SNOW),
+        77: ("눈발", _ICON_SNOW), 80: ("소나기", _ICON_RAIN), 81: ("강한 소나기", _ICON_RAIN),
+        82: ("폭우", _ICON_STORM), 85: ("가벼운 눈", _ICON_SNOW), 86: ("강한 눈", _ICON_SNOW),
+        95: ("천둥번개", _ICON_STORM), 96: ("천둥번개", _ICON_STORM), 99: ("천둥번개", _ICON_STORM),
     }
-    return weather_codes.get(code, ("조금 흐림", "🌤️"))
+    return weather_codes.get(code, ("구름 많음", _ICON_CLOUDY))
 
 # ============================================================
 # 카드 ❶: 일별 상세 (기존 — 변경 없음)
@@ -209,6 +293,7 @@ def fetch_weekly_forecast():
                 forecast.append({
                     "date": f"{dt.month}/{dt.day}",
                     "day": WEEKDAY_KR[dt.weekday()],
+                    "full_date": dt,
                     "icon": icon,
                     "max": round(loc_data['daily']['temperature_2m_max'][d]),
                     "min": round(loc_data['daily']['temperature_2m_min'][d]),
@@ -277,15 +362,15 @@ def render_forecast_card(weekly_data, weekly_advice):
         first_day = weekly_data[0]['forecast'][0]
         last_day = weekly_data[0]['forecast'][-1]
         
-        start_date = datetime.now() + timedelta(days=2)
-        end_date = start_date + timedelta(days=4)
+        start_dt = first_day['full_date']
+        end_dt = last_day['full_date']
         
         date_range = (
-            f"{start_date.strftime('%Y. %m. %d')}"
-            f"({WEEKDAY_KR[start_date.weekday()]})"
+            f"{start_dt.strftime('%Y. %m. %d')}"
+            f"({WEEKDAY_KR[start_dt.weekday()]})"
             f" ~ "
-            f"{end_date.strftime('%m. %d')}"
-            f"({WEEKDAY_KR[end_date.weekday()]})"
+            f"{end_dt.strftime('%m. %d')}"
+            f"({WEEKDAY_KR[end_dt.weekday()]})"
         )
     else:
         date_range = ""
