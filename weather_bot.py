@@ -28,85 +28,93 @@ WEEKDAY_KR = ['월', '화', '수', '목', '금', '토', '일']
 # SVG 아이콘 시스템 — OS/브라우저 무관 일관된 렌더링 보장
 # width/height="1em" → 부모 font-size에 비례해 자동 스케일
 # ============================================================
+# ============================================================
+# SVG 아이콘 시스템 — Simple Filled Style (2026-06-14 리디자인)
+# 기존 outline-only에서 filled 스타일로 교체:
+#   - 구름: 회색 fill로 입체감
+#   - 태양: 앰버 채움 + 심플 4방향 ray
+#   - 비: 구름 + 대각선 3방향 물방울
+#   - 눈: 구름 + 파란 점 3개
+# ============================================================
+
+# 공통 구름 base path (일관된 구름 형태)
+_CLOUD_BASE = 'M4 15a3.5 3.5 0 0 1 0-7 5.5 5.5 0 0 1 10.6-2A3 3 0 0 1 17 15Z'
+_CLOUD_BASE_LIGHT = 'fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5" stroke-linejoin="round"'
+_CLOUD_BASE_MID   = 'fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.5" stroke-linejoin="round"'
+_CLOUD_BASE_DARK  = 'fill="#94A3B8" stroke="#64748B" stroke-width="1.5" stroke-linejoin="round"'
+
 _ICON_SUN = (
-    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" '
-    'stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round">'
-    '<circle cx="12" cy="12" r="4.5"/>'
-    '<line x1="12" y1="2" x2="12" y2="4.5"/>'
-    '<line x1="12" y1="19.5" x2="12" y2="22"/>'
-    '<line x1="2" y1="12" x2="4.5" y2="12"/>'
-    '<line x1="19.5" y1="12" x2="22" y2="12"/>'
-    '<line x1="4.93" y1="4.93" x2="6.76" y2="6.76"/>'
-    '<line x1="17.24" y1="17.24" x2="19.07" y2="19.07"/>'
-    '<line x1="19.07" y1="4.93" x2="17.24" y2="6.76"/>'
-    '<line x1="6.76" y1="17.24" x2="4.93" y2="19.07"/>'
+    '<svg width="1em" height="1em" viewBox="0 0 24 24">'
+    '<circle cx="12" cy="12" r="5" fill="#FCD34D"/>'
+    '<g stroke="#F59E0B" stroke-width="2" stroke-linecap="round">'
+    '<line x1="12" y1="2" x2="12" y2="6"/>'
+    '<line x1="12" y1="18" x2="12" y2="22"/>'
+    '<line x1="2" y1="12" x2="6" y2="12"/>'
+    '<line x1="18" y1="12" x2="22" y2="12"/>'
+    '</g>'
     '</svg>'
 )
 _ICON_PARTLY_CLOUDY = (
-    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<circle cx="9.5" cy="9.5" r="3.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<line x1="9.5" y1="2" x2="9.5" y2="3.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<line x1="3.5" y1="9.5" x2="5" y2="9.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<line x1="5.57" y1="5.57" x2="6.63" y2="6.63" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<line x1="13.43" y1="5.57" x2="12.37" y2="6.63" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<path d="M18 19H9a4 4 0 0 1-.5-7.96A5 5 0 0 1 18 14a3 3 0 0 1 0 5Z" stroke="#94A3B8" stroke-width="1.8" stroke-linejoin="round"/>'
+    '<svg width="1em" height="1em" viewBox="0 0 24 24">'
+    '<circle cx="9" cy="8" r="4" fill="#FCD34D"/>'
+    '<g stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round">'
+    '<line x1="9" y1="1" x2="9" y2="3.5"/>'
+    '<line x1="2" y1="8" x2="4.5" y2="8"/>'
+    '</g>'
+    '<path d="M4 17a3.5 3.5 0 0 1 0-7 5.5 5.5 0 0 1 10.6-2A3 3 0 0 1 17 17Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>'
     '</svg>'
 )
 _ICON_CLOUDY = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<path d="M17.5 19H9a5 5 0 1 1 .9-9.9 7 7 0 0 1 13 2.1A3.5 3.5 0 0 1 17.5 19Z" '
-    'stroke="#94A3B8" stroke-width="1.8" stroke-linejoin="round"/>'
+    '<path d="' + _CLOUD_BASE + '" ' + _CLOUD_BASE_MID + '/>'
     '</svg>'
 )
 _ICON_OVERCAST = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<path d="M4 14.9A7 7 0 1 1 15.7 8H17a5 5 0 0 1 1 9.9" '
-    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>'
+    '<path d="' + _CLOUD_BASE + '" ' + _CLOUD_BASE_DARK + '/>'
     '</svg>'
 )
 _ICON_FOG = (
-    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" '
-    'stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round">'
-    '<path d="M4 14.9A7 7 0 1 1 15.7 8H17a5 5 0 0 1 0 10H5"/>'
-    '<line x1="3" y1="20" x2="21" y2="20"/>'
+    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
+    '<path d="' + _CLOUD_BASE + '" ' + _CLOUD_BASE_LIGHT + '/>'
+    '<g stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round">'
+    '<line x1="3" y1="18" x2="15" y2="18"/>'
+    '<line x1="5" y1="21" x2="13" y2="21"/>'
+    '</g>'
     '</svg>'
 )
 _ICON_RAIN = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<path d="M20 17.6A5 5 0 0 0 18 8h-1.3A7 7 0 1 0 4 14.9" '
-    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
-    '<line x1="8" y1="19" x2="8" y2="21" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
-    '<line x1="12" y1="17" x2="12" y2="19" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
-    '<line x1="16" y1="19" x2="16" y2="21" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
-    '<line x1="10" y1="21" x2="10" y2="23" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
-    '<line x1="14" y1="21" x2="14" y2="23" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>'
+    '<path d="M4 13a3.5 3.5 0 0 1 0-7 5.5 5.5 0 0 1 10.6-2A3 3 0 0 1 17 13Z" ' + _CLOUD_BASE_MID + '/>'
+    '<g stroke="#60A5FA" stroke-width="2" stroke-linecap="round">'
+    '<line x1="6" y1="17" x2="5" y2="21"/>'
+    '<line x1="10" y1="16" x2="9" y2="20"/>'
+    '<line x1="14" y1="17" x2="13" y2="21"/>'
+    '</g>'
     '</svg>'
 )
 _ICON_SNOW = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<path d="M20 17.6A5 5 0 0 0 18 8h-1.3A7 7 0 1 0 4 14.9" '
-    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<circle cx="8" cy="20" r="1.2" fill="#93C5FD"/>'
-    '<circle cx="12" cy="18.5" r="1.2" fill="#93C5FD"/>'
-    '<circle cx="16" cy="20" r="1.2" fill="#93C5FD"/>'
-    '<circle cx="10" cy="22.5" r="1.2" fill="#93C5FD"/>'
-    '<circle cx="14" cy="22.5" r="1.2" fill="#93C5FD"/>'
+    '<path d="M4 13a3.5 3.5 0 0 1 0-7 5.5 5.5 0 0 1 10.6-2A3 3 0 0 1 17 13Z" ' + _CLOUD_BASE_MID + '/>'
+    '<g fill="#93C5FD">'
+    '<circle cx="6" cy="17.5" r="1.5"/>'
+    '<circle cx="10" cy="19" r="1.5"/>'
+    '<circle cx="14" cy="17.5" r="1.5"/>'
+    '</g>'
     '</svg>'
 )
 _ICON_STORM = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<path d="M20 17.6A5 5 0 0 0 18 8h-1.3A7 7 0 1 0 4 14.9" '
-    'stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>'
-    '<polyline points="13,12 10,17 14,17 11,22" '
-    'stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+    '<path d="M4 13a3.5 3.5 0 0 1 0-7 5.5 5.5 0 0 1 10.6-2A3 3 0 0 1 17 13Z" ' + _CLOUD_BASE_DARK + '/>'
+    '<polyline points="11,14 8,19 12,19 9,24" stroke="#FCD34D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
     '</svg>'
 )
 
+# 강수확률 기준값 — 이 이상이면 비 아이콘으로 자동 교체
+_RAIN_ICON_THRESHOLD = 40
+
 def get_weather_desc(code):
-    """WMO 날씨 코드 → (설명, SVG 아이콘 HTML 문자열) 반환.
-    SVG 아이콘은 1em 기준으로 부모 font-size에 비례해 렌더링됩니다.
-    이모지 대신 SVG를 사용하여 OS/Playwright 렌더러 무관 일관성 보장.
-    """
+    """WMO 날씨 코드 → (설명, SVG 아이콘 HTML 문자열) 반환."""
     weather_codes = {
         0: ("맑음", _ICON_SUN),
         1: ("구름 조금", _ICON_PARTLY_CLOUDY),
@@ -121,6 +129,17 @@ def get_weather_desc(code):
         95: ("천둥번개", _ICON_STORM), 96: ("천둥번개", _ICON_STORM), 99: ("천둥번개", _ICON_STORM),
     }
     return weather_codes.get(code, ("구름 많음", _ICON_CLOUDY))
+
+def get_icon_with_prob(code, prob=0):
+    """WMO코드 + 강수확률을 함께 고려해 최종 아이콘 결정.
+    강수확률 ≥ _RAIN_ICON_THRESHOLD% 이고 비/눈/폭풍 아이콘이 아닌 경우
+    비 아이콘으로 자동 교체 — 아이콘과 강수확률 수치 불일치 방지.
+    """
+    desc, icon = get_weather_desc(code)
+    if prob >= _RAIN_ICON_THRESHOLD and code < 51:  # 비/눈/폭풍 코드 아님
+        icon = _ICON_RAIN
+        desc = f"{desc} (강수 {prob}%)"
+    return desc, icon
 
 # ============================================================
 # 카드 ❶: 일별 상세 (기존 — 변경 없음)
@@ -155,8 +174,8 @@ def fetch_weather_data():
             idx = tomorrow_start_idx + h
             temp = round(loc_data['hourly']['temperature_2m'][idx])
             code = loc_data['hourly']['weathercode'][idx]
-            prob = loc_data['hourly']['precipitation_probability'][idx]
-            desc, icon = get_weather_desc(code)
+            prob = min(int(loc_data['hourly']['precipitation_probability'][idx] or 0), 100)
+            desc, icon = get_icon_with_prob(code, prob)
             
             timeline.append({
                 "time": f"{h:02d}:00",
@@ -234,6 +253,15 @@ def render_daily_card(weather_data, ai_comment):
         day_eng=day_eng,
         date_str=date_str
     )
+
+    # ── 렌더 후 무결성 검사: Jinja2 변수 미치환 감지 ──────────────
+    if "{{" in html_content or "{%" in html_content:
+        raise RuntimeError(
+            "[카드❶] 렌더된 HTML에 미치환 Jinja2 변수가 있습니다!\n"
+            "템플릿(weather_dashboard_light.html)의 변수명과 "
+            "render() 인자를 확인하세요."
+        )
+    # ─────────────────────────────────────────────────────────────
     
     with open("temp_render.html", "w", encoding="utf-8") as f:
         f.write(html_content)
@@ -288,7 +316,8 @@ def fetch_weekly_forecast():
                 dt = datetime.strptime(date_str, "%Y-%m-%d")
                 
                 code = loc_data['daily']['weathercode'][d]
-                _, icon = get_weather_desc(code)
+                prob = min(int(loc_data['daily']['precipitation_probability_max'][d] or 0), 100)
+                _, icon = get_icon_with_prob(code, prob)
                 
                 forecast.append({
                     "date": f"{dt.month}/{dt.day}",
@@ -297,7 +326,7 @@ def fetch_weekly_forecast():
                     "icon": icon,
                     "max": round(loc_data['daily']['temperature_2m_max'][d]),
                     "min": round(loc_data['daily']['temperature_2m_min'][d]),
-                    "prob": loc_data['daily']['precipitation_probability_max'][d] or 0,
+                    "prob": prob,
                 })
             except (IndexError, KeyError) as e:
                 print(f"Warning: Missing data for {loc['name']} day {d}: {e}")
@@ -385,6 +414,15 @@ def render_forecast_card(weekly_data, weekly_advice):
         locations=weekly_data,
         ai_advice_list=ai_advice_list,
     )
+
+    # ── 렌더 후 무결성 검사: Jinja2 변수 미치환 감지 ──────────────
+    if "{{" in html_content or "{%" in html_content:
+        raise RuntimeError(
+            "[카드❷] 렌더된 HTML에 미치환 Jinja2 변수가 있습니다!\n"
+            "템플릿(forecast_option_a.html)의 변수명과 "
+            "render() 인자를 확인하세요."
+        )
+    # ─────────────────────────────────────────────────────────────
     
     with open("temp_forecast_render.html", "w", encoding="utf-8") as f:
         f.write(html_content)
@@ -470,6 +508,8 @@ def send_telegram_media_group(img_paths, caption):
 # ============================================================
 
 if __name__ == "__main__":
+    import subprocess
+
     # ── 카드 ❶: 일별 상세 (내일) ──
     print("📋 [카드❶] Fetching daily weather data...")
     weather_data = fetch_weather_data()
@@ -489,7 +529,20 @@ if __name__ == "__main__":
     
     print("🎨 [카드❷] Rendering forecast card...")
     forecast_img = render_forecast_card(weekly_data, weekly_advice)
-    
+
+    # ── 배포 전 교차검증 ──────────────────────────────────────────
+    print("\n🔍 [검증] 렌더 결과 교차검증 실행 중...")
+    validate_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "validate_data.py")
+    verify_result = subprocess.run(
+        [__import__('sys').executable, validate_script],
+        cwd=os.path.dirname(os.path.abspath(__file__))
+    )
+    if verify_result.returncode != 0:
+        print("⚠️  [검증] 데이터 불일치 감지 — 텔레그램 발송 전 로그를 확인하세요.")
+    else:
+        print("✅ [검증] 데이터 일관성 확인 완료!")
+    # ─────────────────────────────────────────────────────────────
+
     # ── 텔레그램 발송: 2장 앨범 ──
     print("📤 Sending 2 cards to Telegram as album...")
     
