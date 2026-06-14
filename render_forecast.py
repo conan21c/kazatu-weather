@@ -37,75 +37,90 @@ LOCATIONS = [
 
 WEEKDAY_KR = ['월', '화', '수', '목', '금', '토', '일']
 
-# ── SVG 아이콘 시스템 — Minimal Line Style — weather_bot.py와 100% 싱크 ─────────────────────
-# fill 완전 제거, stroke 단색 라인만 사용.
-_C = 'fill="none" stroke="#64748B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"'
-# 한쪽이 열린 구름 (open-bottom cloud)
-_CLOUD_PATH      = 'M2 17 Q2 13 5.5 12 Q6.5 8 11 8 Q15.5 8 17 12 Q20 12.5 20 15.5'
-_CLOUD_PATH_HIGH = 'M2 15 Q2 11 5.5 10 Q6.5 6 11 6 Q15.5 6 17 10 Q20 10.5 20 13.5'
+# ── SVG 아이콘 시스템 — Emoji-Faithful Filled Style — weather_bot.py와 100% 싱크 ──────────
+# ☀️🌤️⛅☁️🌧️🌨️⛈️🌫️ 이모지와 시각적으로 동일하게 재현 — filled 색상 + 둥근 구름
+_CF_W = 'fill="#F1F5F9" stroke="#B8C8D8" stroke-width="0.8" stroke-linejoin="round"'
+_CF_G = 'fill="#C8D6E0" stroke="#94A3B8" stroke-width="0.8" stroke-linejoin="round"'
+_CF_D = 'fill="#8FA3B8" stroke="#64748B" stroke-width="0.8" stroke-linejoin="round"'
+
+_CP_W  = 'M2.5 16.5 Q2.5 13 5.5 12 Q6 8.5 10.5 8.5 Q15 8.5 16 12 Q19.5 12 20 15 Q20.5 16.5 18 16.5Z'
+_CP_HI = 'M2.5 14.5 Q2.5 11 5.5 10 Q6 6.5 10.5 6.5 Q15 6.5 16 10 Q19.5 10 20 13 Q20.5 14.5 18 14.5Z'
 
 _ICON_SUN = (
-    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<circle cx="12" cy="12" r="4.5" stroke="#F59E0B" stroke-width="1.6"/>'
-    '<g stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round">'
-    '<line x1="12" y1="2" x2="12" y2="5"/>'
-    '<line x1="12" y1="19" x2="12" y2="22"/>'
-    '<line x1="2" y1="12" x2="5" y2="12"/>'
-    '<line x1="19" y1="12" x2="22" y2="12"/>'
-    '<line x1="5.3" y1="5.3" x2="7.4" y2="7.4"/>'
-    '<line x1="16.6" y1="16.6" x2="18.7" y2="18.7"/>'
-    '<line x1="18.7" y1="5.3" x2="16.6" y2="7.4"/>'
-    '<line x1="7.4" y1="16.6" x2="5.3" y2="18.7"/>'
+    '<svg width="1em" height="1em" viewBox="0 0 24 24">'
+    '<circle cx="12" cy="12" r="5.5" fill="#FBBF24"/>'
+    '<g stroke="#F59E0B" stroke-width="2" stroke-linecap="round">'
+    '<line x1="12" y1="1.5" x2="12" y2="4.5"/>'
+    '<line x1="12" y1="19.5" x2="12" y2="22.5"/>'
+    '<line x1="1.5" y1="12" x2="4.5" y2="12"/>'
+    '<line x1="19.5" y1="12" x2="22.5" y2="12"/>'
+    '<line x1="4.7" y1="4.7" x2="6.8" y2="6.8"/>'
+    '<line x1="17.2" y1="17.2" x2="19.3" y2="19.3"/>'
+    '<line x1="19.3" y1="4.7" x2="17.2" y2="6.8"/>'
+    '<line x1="6.8" y1="17.2" x2="4.7" y2="19.3"/>'
     '</g>'
     '</svg>'
 )
 _ICON_PARTLY_CLOUDY = (
-    '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">'
-    '<g stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round">'
-    '<circle cx="9" cy="7" r="3.5" stroke="#F59E0B" stroke-width="1.6"/>'
-    '<line x1="9" y1="1" x2="9" y2="3"/>'
-    '<line x1="2" y1="7" x2="4" y2="7"/>'
+    '<svg width="1em" height="1em" viewBox="0 0 24 24">'
+    '<circle cx="9.5" cy="9" r="4" fill="#FBBF24"/>'
+    '<g stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round">'
+    '<line x1="9.5" y1="2" x2="9.5" y2="4.5"/>'
+    '<line x1="2" y1="9" x2="4.5" y2="9"/>'
+    '<line x1="4.2" y1="4.2" x2="6" y2="6"/>'
     '</g>'
-    '<path d="M2 19 Q2 15.5 5 14.5 Q6 11 10 11 Q14 11 15.5 14.5 Q18 15 18 17.5" ' + _C + '/>'
+    '<path d="M5.5 19.5 Q5.5 16.5 8 16 Q8.5 13.5 12 13.5 Q15.5 13.5 16 16 Q18.5 16 19 18 Q19.5 19.5 17.5 19.5Z" ' + _CF_W + '/>'
     '</svg>'
 )
 _ICON_CLOUDY = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24">'
-    '<path d="' + _CLOUD_PATH + '" ' + _C + '/>'
+    '<circle cx="9" cy="9" r="4" fill="#FBBF24"/>'
+    '<g stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round">'
+    '<line x1="9" y1="2" x2="9" y2="4.5"/>'
+    '<line x1="2" y1="9" x2="4.5" y2="9"/>'
+    '</g>'
+    '<path d="' + _CP_W + '" ' + _CF_W + '/>'
     '</svg>'
 )
 _ICON_OVERCAST = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24">'
-    '<path d="' + _CLOUD_PATH + '" ' + _C + '/>'
-    '<path d="M2 19h14" stroke="#94A3B8" stroke-width="1.4" stroke-linecap="round"/>'
-    '<path d="M4 22h10" stroke="#94A3B8" stroke-width="1.4" stroke-linecap="round"/>'
+    '<path d="M2 17 Q2 13.5 5 12.5 Q5.5 9 9.5 9 Q13.5 9 14.5 12.5 Q18.5 12.5 19 15.5 Q19.5 17 17 17Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="0.8" stroke-linejoin="round"/>'
+    '</svg>'
+)
+_ICON_FOG = (
+    '<svg width="1em" height="1em" viewBox="0 0 24 24">'
+    '<path d="M2 14.5 Q2 11 5 10 Q5.5 6.5 9.5 6.5 Q13.5 6.5 14.5 10 Q18.5 10 19 13 Q19.5 14.5 17 14.5Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="0.8" stroke-linejoin="round"/>'
+    '<g stroke="#94A3B8" stroke-width="2" stroke-linecap="round">'
+    '<line x1="3" y1="17.5" x2="19" y2="17.5"/>'
+    '<line x1="5" y1="20.5" x2="17" y2="20.5"/>'
+    '</g>'
     '</svg>'
 )
 _ICON_RAIN = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24">'
-    '<path d="' + _CLOUD_PATH_HIGH + '" ' + _C + '/>'
-    '<g stroke="#60A5FA" stroke-width="1.6" stroke-linecap="round">'
-    '<line x1="7" y1="17" x2="5.5" y2="22"/>'
-    '<line x1="11" y1="17" x2="9.5" y2="22"/>'
-    '<line x1="15" y1="17" x2="13.5" y2="22"/>'
+    '<path d="' + _CP_HI + '" ' + _CF_G + '/>'
+    '<g stroke="#60A5FA" stroke-width="2" stroke-linecap="round">'
+    '<line x1="7" y1="17" x2="5.5" y2="21"/>'
+    '<line x1="12" y1="17" x2="10.5" y2="21"/>'
+    '<line x1="17" y1="17" x2="15.5" y2="21"/>'
     '</g>'
     '</svg>'
 )
 _ICON_SNOW = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24">'
-    '<path d="' + _CLOUD_PATH_HIGH + '" ' + _C + '/>'
-    '<g stroke="#93C5FD" stroke-width="1.6" stroke-linecap="round">'
-    '<line x1="7" y1="18" x2="7" y2="23"/>'
-    '<line x1="5" y1="20" x2="9" y2="20"/>'
-    '<line x1="12" y1="18" x2="12" y2="23"/>'
-    '<line x1="10" y1="20" x2="14" y2="20"/>'
+    '<path d="' + _CP_HI + '" ' + _CF_G + '/>'
+    '<g stroke="#93C5FD" stroke-width="2" stroke-linecap="round">'
+    '<line x1="7" y1="17" x2="7" y2="22"/>'
+    '<line x1="4.5" y1="19.5" x2="9.5" y2="19.5"/>'
+    '<line x1="15" y1="17" x2="15" y2="22"/>'
+    '<line x1="12.5" y1="19.5" x2="17.5" y2="19.5"/>'
     '</g>'
     '</svg>'
 )
 _ICON_STORM = (
     '<svg width="1em" height="1em" viewBox="0 0 24 24">'
-    '<path d="' + _CLOUD_PATH_HIGH + '" ' + _C + '/>'
-    '<polyline points="12,16 9,21 13,21 10,26" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+    '<path d="M2.5 14 Q2.5 10.5 5.5 9.5 Q6 6 10.5 6 Q15 6 16 9.5 Q19.5 9.5 20 12.5 Q20.5 14 18 14Z" ' + _CF_D + '/>'
+    '<polyline points="13,15 10,21 14,21 11,27" fill="none" stroke="#FCD34D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
     '</svg>'
 )
 
