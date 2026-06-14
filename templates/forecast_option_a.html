@@ -90,12 +90,12 @@
                 <div class="flex justify-between gap-3">
                     {% for day in almaty.forecast %}
                     <div class="day-cell">
-                        <div class="text-[20px] mb-0.5 flex items-baseline justify-center gap-[3px] {% if day.day in ['토','일'] %}font-bold text-red-400{% else %}font-medium text-slate-900{% endif %}"><span>{{ day.date }}</span><span class="font-light text-[16px]">{{ day.day }}</span></div>
+                        <div class="text-[20px] mb-0.5 flex items-baseline justify-center gap-[3px] {% if day.day in ['토','일'] %}font-medium text-red-400{% else %}font-medium text-slate-900{% endif %}"><span>{{ day.date }}</span><span class="font-light text-[16px]">{{ day.day }}</span></div>
                         <div class="text-[36px] my-1" style="display:flex;align-items:center;justify-content:center;">{{ day.icon | safe }}</div>
                         <div class="flex items-baseline justify-center gap-1">
-                            <span class="text-[28px] font-semibold text-red-500">{{ day.max }}°</span>
-                            <span class="text-[16px] text-slate-300">/</span>
-                            <span class="text-[28px] font-light text-blue-500">{{ day.min }}°</span>
+                            <span class="text-[28px] font-light text-red-500">{{ day.max }}°</span>
+                            <span class="text-[15px] text-slate-300">/</span>
+                            <span class="text-[22px] font-light text-blue-500">{{ day.min }}°</span>
                         </div>
                         {% if day.prob > 0 %}
                         <div class="text-[18px] font-light text-slate-500 mt-0.5" style="display:flex;align-items:center;justify-content:center;gap:2px"><svg width="13" height="17" viewBox="0 0 12 16" fill="none" stroke="#94a3b8" stroke-width="1.5" style="flex-shrink:0"><path d="M6 1C6 1 1 7 1 10a5 5 0 0 0 10 0C11 7 6 1 6 1Z"/></svg>{{ day.prob }}%</div>
@@ -124,12 +124,12 @@
                 <div class="flex justify-between gap-1">
                     {% for day in loc.forecast %}
                     <div class="day-cell">
-                        <div class="text-[15px] mb-0.5 flex items-baseline justify-center gap-[2px] {% if day.day in ['토','일'] %}font-bold text-red-400{% else %}font-medium text-slate-900{% endif %}"><span>{{ day.date }}</span><span class="text-[12px]">{{ day.day }}</span></div>
+                        <div class="text-[15px] mb-0.5 flex items-baseline justify-center gap-[2px] {% if day.day in ['토','일'] %}font-medium text-red-400{% else %}font-medium text-slate-900{% endif %}"><span>{{ day.date }}</span><span class="text-[12px]">{{ day.day }}</span></div>
                         <div class="text-[26px] my-0.5" style="display:flex;align-items:center;justify-content:center;">{{ day.icon | safe }}</div>
                         <div class="flex items-baseline justify-center gap-0.5">
-                            <span class="text-[20px] font-semibold text-red-500">{{ day.max }}°</span>
-                            <span class="text-[13px] text-slate-300">/</span>
-                            <span class="text-[20px] font-light text-blue-500">{{ day.min }}°</span>
+                            <span class="text-[17px] font-light text-red-500">{{ day.max }}°</span>
+                            <span class="text-[12px] text-slate-300">/</span>
+                            <span class="text-[14px] font-light text-blue-500">{{ day.min }}°</span>
                         </div>
                         {% if day.prob > 0 %}
                         <div class="text-[14px] font-light text-slate-500 mt-0.5" style="display:flex;align-items:center;justify-content:center;gap:1px"><svg width="10" height="14" viewBox="0 0 12 16" fill="none" stroke="#94a3b8" stroke-width="1.5" style="flex-shrink:0"><path d="M6 1C6 1 1 7 1 10a5 5 0 0 0 10 0C11 7 6 1 6 1Z"/></svg>{{ day.prob }}%</div>
