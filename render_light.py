@@ -3,6 +3,10 @@ import asyncio
 from jinja2 import Environment, FileSystemLoader
 from playwright.async_api import async_playwright
 import datetime
+from render_forecast import (
+    _ICON_SUN, _ICON_PARTLY_CLOUDY, _ICON_CLOUDY, 
+    _ICON_OVERCAST, _ICON_FOG, _ICON_RAIN, _ICON_SNOW, _ICON_STORM
+)
 
 async def render_light_sample():
     # Mock data for sample
@@ -12,46 +16,46 @@ async def render_light_sample():
 
     locations = [
         {"name": "알마티 시내", "max": 19, "min": 11, "timeline": [
-            {"time": "09:00", "icon": "⛅", "temp": 16, "prob": 0},
-            {"time": "12:00", "icon": "☁️", "temp": 18, "prob": 0},
-            {"time": "15:00", "icon": "☁️", "temp": 19, "prob": 13},
-            {"time": "18:00", "icon": "🌧️", "temp": 16, "prob": 45}
+            {"time": "09:00", "icon": _ICON_CLOUDY, "temp": 16, "prob": 0},
+            {"time": "12:00", "icon": _ICON_OVERCAST, "temp": 18, "prob": 0},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 19, "prob": 13},
+            {"time": "18:00", "icon": _ICON_RAIN, "temp": 16, "prob": 45}
         ]},
         {"name": "침블락", "max": 11, "min": 2, "timeline": [
-            {"time": "09:00", "icon": "☁️", "temp": 10, "prob": 0},
-            {"time": "12:00", "icon": "☁️", "temp": 11, "prob": 0},
-            {"time": "15:00", "icon": "☁️", "temp": 10, "prob": 38},
-            {"time": "18:00", "icon": "🌧️", "temp": 7, "prob": 78}
+            {"time": "09:00", "icon": _ICON_OVERCAST, "temp": 10, "prob": 0},
+            {"time": "12:00", "icon": _ICON_OVERCAST, "temp": 11, "prob": 0},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 10, "prob": 38},
+            {"time": "18:00", "icon": _ICON_RAIN, "temp": 7, "prob": 78}
         ]},
         {"name": "아씨고원", "max": 14, "min": -1, "timeline": [
-            {"time": "09:00", "icon": "☁️", "temp": 10, "prob": 0},
-            {"time": "12:00", "icon": "☁️", "temp": 14, "prob": 0},
-            {"time": "15:00", "icon": "☁️", "temp": 11, "prob": 26},
-            {"time": "18:00", "icon": "🌧️", "temp": 7, "prob": 52}
+            {"time": "09:00", "icon": _ICON_OVERCAST, "temp": 10, "prob": 0},
+            {"time": "12:00", "icon": _ICON_OVERCAST, "temp": 14, "prob": 0},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 11, "prob": 26},
+            {"time": "18:00", "icon": _ICON_RAIN, "temp": 7, "prob": 52}
         ]},
         {"name": "카인디 호수", "max": 17, "min": 6, "timeline": [
-            {"time": "09:00", "icon": "⛅", "temp": 15, "prob": 0},
-            {"time": "12:00", "icon": "☁️", "temp": 17, "prob": 11},
-            {"time": "15:00", "icon": "☁️", "temp": 16, "prob": 30},
-            {"time": "18:00", "icon": "🌧️", "temp": 12, "prob": 33}
+            {"time": "09:00", "icon": _ICON_CLOUDY, "temp": 15, "prob": 0},
+            {"time": "12:00", "icon": _ICON_OVERCAST, "temp": 17, "prob": 11},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 16, "prob": 30},
+            {"time": "18:00", "icon": _ICON_RAIN, "temp": 12, "prob": 33}
         ]},
         {"name": "콜사이 호수", "max": 14, "min": 3, "timeline": [
-            {"time": "09:00", "icon": "☀️", "temp": 13, "prob": 0},
-            {"time": "12:00", "icon": "☁️", "temp": 14, "prob": 10},
-            {"time": "15:00", "icon": "☁️", "temp": 13, "prob": 35},
-            {"time": "18:00", "icon": "🌧️", "temp": 10, "prob": 60}
+            {"time": "09:00", "icon": _ICON_SUN, "temp": 13, "prob": 0},
+            {"time": "12:00", "icon": _ICON_OVERCAST, "temp": 14, "prob": 10},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 13, "prob": 35},
+            {"time": "18:00", "icon": _ICON_RAIN, "temp": 10, "prob": 60}
         ]},
         {"name": "차른캐년", "max": 24, "min": 10, "timeline": [
-            {"time": "09:00", "icon": "☁️", "temp": 20, "prob": 0},
-            {"time": "12:00", "icon": "⛅", "temp": 23, "prob": 0},
-            {"time": "15:00", "icon": "☁️", "temp": 23, "prob": 0},
-            {"time": "18:00", "icon": "☁️", "temp": 19, "prob": 0}
+            {"time": "09:00", "icon": _ICON_OVERCAST, "temp": 20, "prob": 0},
+            {"time": "12:00", "icon": _ICON_CLOUDY, "temp": 23, "prob": 0},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 23, "prob": 0},
+            {"time": "18:00", "icon": _ICON_OVERCAST, "temp": 19, "prob": 0}
         ]},
         {"name": "알틴에멜", "max": 25, "min": 13, "timeline": [
-            {"time": "09:00", "icon": "⛅", "temp": 20, "prob": 0},
-            {"time": "12:00", "icon": "⛅", "temp": 24, "prob": 0},
-            {"time": "15:00", "icon": "☁️", "temp": 24, "prob": 0},
-            {"time": "18:00", "icon": "☁️", "temp": 21, "prob": 0}
+            {"time": "09:00", "icon": _ICON_CLOUDY, "temp": 20, "prob": 0},
+            {"time": "12:00", "icon": _ICON_CLOUDY, "temp": 24, "prob": 0},
+            {"time": "15:00", "icon": _ICON_OVERCAST, "temp": 24, "prob": 0},
+            {"time": "18:00", "icon": _ICON_OVERCAST, "temp": 21, "prob": 0}
         ]}
     ]
 
