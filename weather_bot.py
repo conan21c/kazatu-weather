@@ -173,15 +173,28 @@ def get_icon_with_prob(code, prob=0):
 # 카드 ❶: 일별 상세 (기존 — 변경 없음)
 # ============================================================
 
+def fetch_json_with_retry(url, max_retries=3, backoff_factor=2):
+    """API 요청 시 네트워크 순간 장애(Connection reset)에 대비한 재시도 래퍼"""
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, headers=headers, timeout=15)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(f"⚠️ [Network Attempt {attempt + 1}/{max_retries}] API fetch error: {e}")
+            if attempt == max_retries - 1:
+                raise
+            import time
+            time.sleep(backoff_factor * (attempt + 1))
+
 def fetch_weather_data():
     lats = ",".join([str(loc['lat']) for loc in LOCATIONS])
     lons = ",".join([str(loc['lon']) for loc in LOCATIONS])
     # Fetch hourly data including precipitation probability
     url = f"https://api.open-meteo.com/v1/forecast?latitude={lats}&longitude={lons}&hourly=temperature_2m,weathercode,precipitation_probability&timezone=Asia%2FAlmaty"
     
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req) as response:
-        data = json.loads(response.read().decode())
+    data = fetch_json_with_retry(url)
         
     results = []
     # Open-Meteo returns array if multiple coords are queried
@@ -296,7 +309,7 @@ def render_daily_card(weather_data, ai_comment):
         
     img_path = "daily_weather_card.png"
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = p.chromium.launch(args=['--no-sandbox', '--disable-dev-shm-usage'])
         page = browser.new_page(viewport={'width': 1080, 'height': 1800}, device_scale_factor=2)
         page.goto("file://" + os.path.abspath("temp_render.html"))
         page.wait_for_timeout(1000) 
@@ -323,9 +336,7 @@ def fetch_weekly_forecast():
         f"&forecast_days=8"
     )
     
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    with urllib.request.urlopen(req) as response:
-        data = json.loads(response.read().decode())
+    data = fetch_json_with_retry(url)
     
     is_multi = isinstance(data, list)
     
@@ -457,7 +468,7 @@ def render_forecast_card(weekly_data, weekly_advice):
     
     img_path = "forecast_weather_card.png"
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = p.chromium.launch(args=['--no-sandbox', '--disable-dev-shm-usage'])
         page = browser.new_page(viewport={'width': 1080, 'height': 3000}, device_scale_factor=2)
         page.goto("file://" + os.path.abspath("temp_forecast_render.html"))
         page.wait_for_timeout(1500)
@@ -480,11 +491,14 @@ def send_telegram_message(img_path, text_caption):
     with open(img_path, 'rb') as photo:
         files = {'photo': photo}
         data = {'chat_id': TELEGRAM_CHAT_ID, 'caption': text_caption}
-        response = requests.post(url, files=files, data=data)
-        if response.status_code == 200:
-            print("Telegram message sent successfully.")
-        else:
-            print("Failed to send Telegram message:", response.text)
+        try:
+            response = requests.post(url, files=files, data=data, timeout=30)
+            if response.status_code == 200:
+                print("Telegram message sent successfully.")
+            else:
+                print("Failed to send Telegram message:", response.text)
+        except Exception as e:
+            print(f"Telegram API exception: {e}")
 
 def send_telegram_media_group(img_paths, caption):
     """2장 이미지를 앨범(미디어 그룹)으로 발송"""
@@ -517,7 +531,7 @@ def send_telegram_media_group(img_paths, caption):
     }
     
     try:
-        response = requests.post(url, data=data, files=files)
+        response = requests.post(url, data=data, files=files, timeout=30)
         if response.status_code == 200:
             print("Telegram media group sent successfully.")
         else:
@@ -526,6 +540,8 @@ def send_telegram_media_group(img_paths, caption):
             print("Falling back to individual photo sends...")
             for img_path in img_paths:
                 send_telegram_message(img_path, caption)
+    except Exception as e:
+        print(f"Telegram media group exception: {e}")
     finally:
         # 파일 핸들 닫기
         for f in files.values():
@@ -561,14 +577,17 @@ if __name__ == "__main__":
     # ── 배포 전 교차검증 ──────────────────────────────────────────
     print("\n🔍 [검증] 렌더 결과 교차검증 실행 중...")
     validate_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "validate_data.py")
-    verify_result = subprocess.run(
-        [__import__('sys').executable, validate_script],
-        cwd=os.path.dirname(os.path.abspath(__file__))
-    )
-    if verify_result.returncode != 0:
-        print("⚠️  [검증] 데이터 불일치 감지 — 텔레그램 발송 전 로그를 확인하세요.")
+    if os.path.exists(validate_script):
+        verify_result = subprocess.run(
+            [__import__('sys').executable, validate_script],
+            cwd=os.path.dirname(os.path.abspath(__file__))
+        )
+        if verify_result.returncode != 0:
+            print("⚠️  [검증] 데이터 불일치 감지 — 텔레그램 발송 전 로그를 확인하세요.")
+        else:
+            print("✅ [검증] 데이터 일관성 확인 완료!")
     else:
-        print("✅ [검증] 데이터 일관성 확인 완료!")
+        print("ℹ️  [검증] validate_data.py 파일이 없어 검증 단계를 건너땁니다.")
     # ─────────────────────────────────────────────────────────────
 
     # ── 텔레그램 발송: 2장 앨범 ──
